@@ -3,7 +3,7 @@ package com.kotrkv.mentor.jsp.model;
 import java.time.LocalDate;
 
 public class User {
-    private Long id;
+    private Integer id;
     private String login;
     private String password;
     private String email;
@@ -12,7 +12,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String login, String password, String email, LocalDate birthday) {
+    public User(Integer id, String login, String password, String email, LocalDate birthday) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -20,11 +20,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
