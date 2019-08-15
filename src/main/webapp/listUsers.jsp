@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3>Users...</h3>
-<table>
+<table class="form-style-9">
     <tr>
         <th>User login</th>
         <th>User password</th>

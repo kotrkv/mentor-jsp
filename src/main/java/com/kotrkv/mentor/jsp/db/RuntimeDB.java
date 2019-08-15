@@ -14,8 +14,8 @@ public class RuntimeDB {
 
     private RuntimeDB() {
         this.users = new ArrayList<>();
-        users.add(new User(1, "One", "passone", "one@gmail.com", LocalDate.parse("1994-01-01")));
-        users.add(new User(2, "Two", "passtwo", "two@gmail.com", LocalDate.parse("1995-05-05")));
+        users.add(new User("One", "passone", "one@gmail.com", LocalDate.parse("1994-01-01")));
+        users.add(new User("Two", "passtwo", "two@gmail.com", LocalDate.parse("1995-05-05")));
     }
 
     public static RuntimeDB getInstance() {

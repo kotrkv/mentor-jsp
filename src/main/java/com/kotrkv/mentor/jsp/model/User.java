@@ -3,6 +3,8 @@ package com.kotrkv.mentor.jsp.model;
 import java.time.LocalDate;
 
 public class User {
+    private static int COUNTER = 1;
+
     private Integer id;
     private String login;
     private String password;
@@ -12,7 +14,8 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String login, String password, String email, LocalDate birthday) {
+    public User(String login, String password, String email, LocalDate birthday) {
+        this.id = COUNTER++;
         this.id = id;
         this.login = login;
         this.password = password;
@@ -22,10 +25,6 @@ public class User {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getLogin() {

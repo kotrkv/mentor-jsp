@@ -16,4 +16,8 @@ public class UserService {
     public List<User> findAll() {
         return daoUser.getAll();
     }
+
+    public void add(User user) {
+        daoUser.create(user);
+    }
 }
