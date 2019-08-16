@@ -23,6 +23,14 @@ public class User {
         this.birthday = birthday;
     }
 
+    public User(Integer id, String login, String password, String email, LocalDate birthday) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.birthday = birthday;
+    }
+
     public Integer getId() {
         return id;
     }
