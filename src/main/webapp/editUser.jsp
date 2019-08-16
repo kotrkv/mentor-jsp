@@ -8,6 +8,7 @@
 </head>
 <body>
 <h3>Add new user...</h3>
+<a href="index.html"><-- Home</a>
 <form action="/updateUser" method="post" class="form-style-9">
     <ul>
 
