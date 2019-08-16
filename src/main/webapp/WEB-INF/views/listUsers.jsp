@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3>Users...</h3>
-<a href="index.html"><-- Home</a>
+<a href="../../index.html"><-- Home</a>
 <table class="form-style-9">
     <tr>
         <th>User login</th>

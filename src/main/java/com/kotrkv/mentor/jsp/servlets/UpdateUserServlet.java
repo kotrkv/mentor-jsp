@@ -25,7 +25,7 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = service.findById(Integer.parseInt(req.getParameter("id"))).get();
         req.setAttribute("user", user);
-        req.getRequestDispatcher("/editUser.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/updateUser.jsp").forward(req, resp);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class UpdateUserServlet extends HttpServlet {
             resp.sendRedirect("/users");
         } catch (Exception e) {
             req.setAttribute("error", e.getMessage());
-            req.getRequestDispatcher("/errorPage.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
         }
     }
 }

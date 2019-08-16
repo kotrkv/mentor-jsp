@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3>Add user...</h3>
-<a href="index.html"><-- Home</a>
+<a href="../../index.html"><-- Home</a>
 <form action="/addUser" method="post" class="form-style-9">
     <ul>
         <li>

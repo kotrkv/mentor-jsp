@@ -23,7 +23,7 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/addUser.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/addUser.jsp").forward(req, resp);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AddUserServlet extends HttpServlet {
             resp.sendRedirect("/users");
         } catch (Exception e) {
             req.setAttribute("error", e.getMessage());
-            req.getRequestDispatcher("/errorPage.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
         }
     }
 }
