@@ -3,11 +3,13 @@ package com.kotrkv.mentor.jsp.dao.impls;
 import com.kotrkv.mentor.jsp.dao.Dao;
 import com.kotrkv.mentor.jsp.model.User;
 
+import java.io.FileInputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 public class UserDao implements Dao<User, Integer> {
 
@@ -42,7 +44,21 @@ public class UserDao implements Dao<User, Integer> {
             throw new RuntimeException(e);
         }
     }
-
+//    private UserDao() {
+//        Properties properties = new Properties();
+//        try {
+//            properties.load(new FileInputStream("resources/db.properties"));
+//
+//            String driver = properties.getProperty("db.url");
+//            String user = properties.getProperty("db.username");
+//            String password = properties.getProperty("db.password");
+//            Class.forName(properties.getProperty("db.driver"));
+//            connection = DriverManager.getConnection(driver, user, password);
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
     public static UserDao getInstance() {
         return INSTANCE;
     }

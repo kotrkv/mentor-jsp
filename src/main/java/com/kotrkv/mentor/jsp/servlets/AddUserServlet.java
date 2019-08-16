@@ -28,11 +28,16 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        String email = req.getParameter("email");
-        LocalDate birthday = LocalDate.parse(req.getParameter("birthday"));
-        service.add(new User(login, password, email, birthday));
-        resp.sendRedirect("/users");
+        try {
+            String login = req.getParameter("login");
+            String password = req.getParameter("password");
+            String email = req.getParameter("email");
+            LocalDate birthday = LocalDate.parse(req.getParameter("birthday"));
+            service.add(new User(login, password, email, birthday));
+            resp.sendRedirect("/users");
+        } catch (Exception e) {
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/errorPage.jsp").forward(req, resp);
+        }
     }
 }

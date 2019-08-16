@@ -30,12 +30,18 @@ public class UpdateUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = service.findById(Integer.parseInt(req.getParameter("id"))).get();
-        user.setLogin(req.getParameter("login"));
-        user.setPassword(req.getParameter("password"));
-        user.setEmail(req.getParameter("email"));
-        user.setBirthday(LocalDate.parse(req.getParameter("birthday")));
-        service.update(user);
-        resp.sendRedirect("/users");
+        try {
+            User user = service.findById(Integer.parseInt(req.getParameter("id"))).get();
+
+            user.setLogin(req.getParameter("login"));
+            user.setPassword(req.getParameter("password"));
+            user.setEmail(req.getParameter("email"));
+            user.setBirthday(LocalDate.parse(req.getParameter("birthday")));
+            service.update(user);
+            resp.sendRedirect("/users");
+        } catch (Exception e) {
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/errorPage.jsp").forward(req, resp);
+        }
     }
 }
