@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet("/addUser")
-public class AddUserServlet extends HttpServlet {
+@WebServlet("/updateUser")
+public class UpdateUserServlet extends HttpServlet {
 
     UserService service;
 
@@ -23,16 +23,19 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/addUser.jsp").forward(req, resp);
+        User user = service.findById(Integer.parseInt(req.getParameter("id"))).get();
+        req.setAttribute("user", user);
+        req.getRequestDispatcher("/editUser.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        String email = req.getParameter("email");
-        LocalDate birthday = LocalDate.parse(req.getParameter("birthday"));
-        service.add(new User(login, password, email, birthday));
+        User user = service.findById(Integer.parseInt(req.getParameter("id"))).get();
+        user.setLogin(req.getParameter("login"));
+        user.setPassword(req.getParameter("password"));
+        user.setEmail(req.getParameter("email"));
+        user.setBirthday(LocalDate.parse(req.getParameter("birthday")));
+        service.update(user);
         resp.sendRedirect("/users");
     }
 }

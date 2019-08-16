@@ -34,7 +34,12 @@ public class UserDaoRuntimeDB implements Dao<User, Integer> {
     }
 
     @Override
-    public void delete(User user) {
-        RuntimeDB.getInstance().getUsers().remove(user);
+    public void delete(Integer id) {
+        RuntimeDB.getInstance().getUsers().remove(id);
+    }
+
+    @Override
+    public void update(User user) {
+
     }
 }

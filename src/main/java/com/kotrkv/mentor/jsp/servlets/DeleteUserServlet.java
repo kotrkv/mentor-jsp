@@ -1,6 +1,5 @@
 package com.kotrkv.mentor.jsp.servlets;
 
-import com.kotrkv.mentor.jsp.model.User;
 import com.kotrkv.mentor.jsp.service.UserService;
 
 import javax.servlet.ServletException;
@@ -9,11 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
 
-@WebServlet("/addUser")
-public class AddUserServlet extends HttpServlet {
-
+@WebServlet("/deleteUser")
+public class DeleteUserServlet extends HttpServlet {
     UserService service;
 
     @Override
@@ -23,16 +20,13 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/addUser.jsp").forward(req, resp);
+        Integer id = Integer.parseInt(req.getParameter("id"));
+        service.delete(id);
+        resp.sendRedirect("/users");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        String email = req.getParameter("email");
-        LocalDate birthday = LocalDate.parse(req.getParameter("birthday"));
-        service.add(new User(login, password, email, birthday));
-        resp.sendRedirect("/users");
+
     }
 }

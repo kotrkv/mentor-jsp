@@ -14,6 +14,7 @@
         <th>User password</th>
         <th>User email</th>
         <th>User birthday</th>
+        <th colspan="2">Action</th>
     </tr>
     <c:forEach var="user" items="${users}">
         <tr>
@@ -21,6 +22,8 @@
             <td>${user.password}</td>
             <td>${user.email}</td>
             <td>${user.birthday}</td>
+            <td><a href="updateUser?id=${user.id}">Edit</a></td>
+            <td><a href="deleteUser?id=${user.id}">Remove</a></td>
         </tr>
     </c:forEach>
 </table>

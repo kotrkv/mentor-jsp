@@ -73,15 +73,23 @@
     background-color: #28739E;
 }
 
+h3 {
+    text-align: center;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
+}
+tbody {
+    border-radius: 10px;
 }
 /* Zebra striping */
 tr:nth-of-type(odd) {
     background: #eee;
 }
 th {
+    text-align: center;
     background: #333;
     color: white;
     font-weight: bold;
