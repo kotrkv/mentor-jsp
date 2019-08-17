@@ -14,6 +14,7 @@ public class UserDaoJdbc implements UserDao {
 
     private Connection connection;
 
+    //language=sql
     private final String SQL_INSERT =
             "INSERT INTO jsp_project.users (login, password, email, birthday) VALUES(?, ?, ?, ?)";
 
