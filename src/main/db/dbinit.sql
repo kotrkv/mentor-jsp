@@ -1,6 +1,8 @@
 create database mentor
     with owner admin;
 
+create schema jsp_project;
+
 create table jsp_project.users
 (
     id       serial      not null
