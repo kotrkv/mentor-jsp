@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet("/addUser")
+@WebServlet(urlPatterns = "/addUser", name = "addUserServlet")
 public class AddUserServlet extends HttpServlet {
 
     UserService service;
