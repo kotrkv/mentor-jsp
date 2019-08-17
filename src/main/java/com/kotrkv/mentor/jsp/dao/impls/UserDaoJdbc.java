@@ -1,17 +1,16 @@
 package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.Dao;
+import com.kotrkv.mentor.jsp.dao.UserDao;
 import com.kotrkv.mentor.jsp.model.User;
 
-import java.io.FileInputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Properties;
 
-public class UserDao implements Dao<User, Integer> {
+public class UserDaoJdbc implements UserDao {
 
     private Connection connection;
 
@@ -30,9 +29,9 @@ public class UserDao implements Dao<User, Integer> {
     private final String SQL_DELETE =
             "DELETE FROM jsp_project.users WHERE id = ?";
 
-    private static final UserDao INSTANCE = new UserDao();
+    private static final UserDaoJdbc INSTANCE = new UserDaoJdbc();
 
-    private UserDao() {
+    private UserDaoJdbc() {
         try {
             String driver = "jdbc:postgresql://localhost:5432/mentor";
             String user = "postgres";
@@ -59,7 +58,7 @@ public class UserDao implements Dao<User, Integer> {
 //            throw new RuntimeException(e);
 //        }
 //    }
-    public static UserDao getInstance() {
+    public static UserDaoJdbc getInstance() {
         return INSTANCE;
     }
 

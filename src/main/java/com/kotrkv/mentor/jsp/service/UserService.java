@@ -1,7 +1,7 @@
 package com.kotrkv.mentor.jsp.service;
 
 import com.kotrkv.mentor.jsp.dao.Dao;
-import com.kotrkv.mentor.jsp.dao.impls.UserDao;
+import com.kotrkv.mentor.jsp.dao.impls.UserDaoJdbc;
 import com.kotrkv.mentor.jsp.model.User;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class UserService {
     private Dao<User, Integer> daoUser;
 
     public UserService() {
-        daoUser = UserDao.getInstance();
+        daoUser = UserDaoJdbc.getInstance();
     }
 
     public List<User> findAll() {
@@ -24,14 +24,14 @@ public class UserService {
     }
 
     public Optional<User> findById(Integer id) {
-        return UserDao.getInstance().getById(id);
+        return UserDaoJdbc.getInstance().getById(id);
     }
 
     public void update(User user) {
-        UserDao.getInstance().update(user);
+        UserDaoJdbc.getInstance().update(user);
     }
 
     public void delete(Integer id) {
-        UserDao.getInstance().delete(id);
+        UserDaoJdbc.getInstance().delete(id);
     }
 }
