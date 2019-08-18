@@ -1,13 +1,14 @@
 package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.Dao;
+import com.kotrkv.mentor.jsp.dao.UserDao;
 import com.kotrkv.mentor.jsp.db.RuntimeDB;
 import com.kotrkv.mentor.jsp.model.User;
 
 import java.util.List;
 import java.util.Optional;
 
-public class UserDaoRuntimeDB implements Dao<User, Integer> {
+public class UserDaoRuntimeDB implements UserDao {
 
     private static final UserDaoRuntimeDB INSTANCE = new UserDaoRuntimeDB();
 
