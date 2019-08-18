@@ -25,14 +25,14 @@ public class UserService {
     }
 
     public Optional<User> findById(Integer id) {
-        return UserDaoJdbc.getInstance().getById(id);
+        return daoUser.getById(id);
     }
 
     public void update(User user) {
-        UserDaoJdbc.getInstance().update(user);
+        daoUser.update(user);
     }
 
     public void delete(Integer id) {
-        UserDaoJdbc.getInstance().delete(id);
+        daoUser.delete(id);
     }
 }
