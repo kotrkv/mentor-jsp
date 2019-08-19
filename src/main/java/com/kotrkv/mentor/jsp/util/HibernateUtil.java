@@ -1,5 +1,6 @@
 package com.kotrkv.mentor.jsp.util;
 
+import com.kotrkv.mentor.jsp.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -20,14 +21,15 @@ public class HibernateUtil {
         Configuration configuration = new Configuration();
 //        configuration.addAnnotatedClass(Car.class);
 //        configuration.addAnnotatedClass(DailyReport.class);
-//        configuration.addAnnotatedClass(SaleCar.class);
+        configuration.addAnnotatedClass(User.class);
 
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
         configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/db_example");
+        configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/mentor");
         configuration.setProperty("hibernate.connection.username", "admin");
         configuration.setProperty("hibernate.connection.password", "postgres");
-        //configuration.setProperty("hibernate.show_sql", "true");
+        configuration.setProperty("hibernate.show_sql", "true");
+        configuration.setProperty("hibernate.current_session_context_class", "thread");
         //configuration.setProperty("hibernate.hbm2ddl.auto", "create");
         return configuration;
     }

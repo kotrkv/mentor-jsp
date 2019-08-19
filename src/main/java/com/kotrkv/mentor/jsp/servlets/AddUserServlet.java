@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.sql.Date;
 
 @WebServlet(urlPatterns = "/addUser", name = "addUserServlet")
 public class AddUserServlet extends HttpServlet {
@@ -32,7 +33,7 @@ public class AddUserServlet extends HttpServlet {
             String login = req.getParameter("login");
             String password = req.getParameter("password");
             String email = req.getParameter("email");
-            LocalDate birthday = LocalDate.parse(req.getParameter("birthday"));
+            Date birthday = Date.valueOf(req.getParameter("birthday"));
             service.add(new User(login, password, email, birthday));
             resp.sendRedirect("/users");
         } catch (Exception e) {

@@ -1,20 +1,33 @@
 package com.kotrkv.mentor.jsp.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.sql.Date;
 
+@Entity
+@Table(name = "users", schema = "jsp_project")
 public class User {
     private static int COUNTER = 1;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name="login")
     private String login;
+
+    @Column(name="password")
     private String password;
+
+    @Column(name="email")
     private String email;
-    private LocalDate birthday;
+
+    @Column(name="birthday")
+    private Date birthday;
 
     public User() {
     }
 
-    public User(String login, String password, String email, LocalDate birthday) {
+    public User(String login, String password, String email, Date birthday) {
         this.id = COUNTER++;
         this.id = id;
         this.login = login;
@@ -23,7 +36,7 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User(Integer id, String login, String password, String email, LocalDate birthday) {
+    public User(Integer id, String login, String password, String email, Date birthday) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -59,11 +72,11 @@ public class User {
         this.email = email;
     }
 
-    public LocalDate getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

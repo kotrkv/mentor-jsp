@@ -1,11 +1,9 @@
 package com.kotrkv.mentor.jsp.dao.impls;
 
-import com.kotrkv.mentor.jsp.dao.Dao;
 import com.kotrkv.mentor.jsp.dao.UserDao;
 import com.kotrkv.mentor.jsp.model.User;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -69,7 +67,7 @@ public class UserDaoJdbc implements UserDao {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setDate(4, Date.valueOf(user.getBirthday()));
+            preparedStatement.setDate(4, user.getBirthday());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -85,7 +83,7 @@ public class UserDaoJdbc implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
-                LocalDate birthday = LocalDate.parse(resultSet.getString("birthday"));
+                Date birthday = Date.valueOf(resultSet.getString("birthday"));
 
                 User user = new User(id, login, password, email, birthday);
 
@@ -109,7 +107,7 @@ public class UserDaoJdbc implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
-                LocalDate birthday = LocalDate.parse(resultSet.getString("birthday"));
+                Date birthday = Date.valueOf(resultSet.getString("birthday"));
 
 
                 User user = new User(id, login, password, email, birthday);
@@ -140,7 +138,7 @@ public class UserDaoJdbc implements UserDao {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setDate(4, Date.valueOf(user.getBirthday()));
+            preparedStatement.setDate(4, user.getBirthday());
             preparedStatement.setInt(5, user.getId());
 
             preparedStatement.executeUpdate();

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
 
 @WebServlet("/updateUser")
@@ -36,7 +37,7 @@ public class UpdateUserServlet extends HttpServlet {
             user.setLogin(req.getParameter("login"));
             user.setPassword(req.getParameter("password"));
             user.setEmail(req.getParameter("email"));
-            user.setBirthday(LocalDate.parse(req.getParameter("birthday")));
+            user.setBirthday(Date.valueOf(req.getParameter("birthday")));
             service.update(user);
             resp.sendRedirect("/users");
         } catch (Exception e) {
