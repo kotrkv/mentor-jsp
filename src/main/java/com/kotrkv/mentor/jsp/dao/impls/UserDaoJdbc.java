@@ -35,7 +35,7 @@ public class UserDaoJdbc implements UserDao {
     private UserDaoJdbc() {
         try {
             String driver = "jdbc:postgresql://localhost:5432/mentor";
-            String user = "postgres";
+            String user = "admin";
             String password = "postgres";
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(driver, user, password);
