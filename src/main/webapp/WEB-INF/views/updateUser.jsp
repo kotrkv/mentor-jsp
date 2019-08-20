@@ -23,9 +23,6 @@
             <input type = "text" name = "email" value = "${user.email}" class="field-style field-full align-none"/>
         </li>
         <li>
-            <input type = "birthday" name = "birthday" value = "${user.birthday}" class="field-style field-full align-none"/>
-        </li>
-        <li>
             <input type = "submit"/>
         </li>
     </ul>

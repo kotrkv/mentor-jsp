@@ -21,27 +21,22 @@ public class User {
     @Column(name="email")
     private String email;
 
-    @Column(name="birthday")
-    private Date birthday;
-
     public User() {
     }
 
-    public User(String login, String password, String email, Date birthday) {
+    public User(String login, String password, String email) {
         this.id = COUNTER++;
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.birthday = birthday;
     }
 
-    public User(Integer id, String login, String password, String email, Date birthday) {
+    public User(Integer id, String login, String password, String email) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.birthday = birthday;
     }
 
     public Integer getId() {
@@ -72,14 +67,6 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -87,7 +74,6 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", birthday=" + birthday +
                 '}';
     }
 }

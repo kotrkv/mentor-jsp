@@ -37,7 +37,6 @@ public class UpdateUserServlet extends HttpServlet {
             user.setLogin(req.getParameter("login"));
             user.setPassword(req.getParameter("password"));
             user.setEmail(req.getParameter("email"));
-            user.setBirthday(Date.valueOf(req.getParameter("birthday")));
             service.update(user);
             resp.sendRedirect("/users");
         } catch (Exception e) {

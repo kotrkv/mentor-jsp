@@ -33,8 +33,7 @@ public class AddUserServlet extends HttpServlet {
             String login = req.getParameter("login");
             String password = req.getParameter("password");
             String email = req.getParameter("email");
-            Date birthday = Date.valueOf(req.getParameter("birthday"));
-            service.add(new User(login, password, email, birthday));
+            service.add(new User(login, password, email));
             resp.sendRedirect("/users");
         } catch (Exception e) {
             req.setAttribute("error", e.getMessage());

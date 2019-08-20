@@ -14,7 +14,7 @@ public class UserDaoJdbc implements UserDao {
 
     //language=sql
     private final String SQL_INSERT =
-            "INSERT INTO jsp_project.users (login, password, email, birthday) VALUES(?, ?, ?, ?)";
+            "INSERT INTO jsp_project.users (login, password, email) VALUES(?, ?, ?)";
 
     private final String SQL_SELECT_ALL =
             "SELECT * FROM jsp_project.users";
@@ -23,7 +23,7 @@ public class UserDaoJdbc implements UserDao {
             "SELECT * FROM jsp_project.users WHERE id = ?";
 
     private final String SQL_UPDATE =
-            "UPDATE jsp_project.users SET login = ?, password = ?, email = ?, birthday = ? WHERE id = ?";
+            "UPDATE jsp_project.users SET login = ?, password = ?, email = ? WHERE id = ?";
 
     private final String SQL_DELETE =
             "DELETE FROM jsp_project.users WHERE id = ?";
@@ -67,7 +67,6 @@ public class UserDaoJdbc implements UserDao {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setDate(4, user.getBirthday());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -83,9 +82,8 @@ public class UserDaoJdbc implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
-                Date birthday = Date.valueOf(resultSet.getString("birthday"));
 
-                User user = new User(id, login, password, email, birthday);
+                User user = new User(id, login, password, email);
 
                 Optional<User> optionalUser = Optional.of(user);
                 return optionalUser;
@@ -109,8 +107,7 @@ public class UserDaoJdbc implements UserDao {
                 String email = resultSet.getString("email");
                 Date birthday = Date.valueOf(resultSet.getString("birthday"));
 
-
-                User user = new User(id, login, password, email, birthday);
+                User user = new User(id, login, password, email);
 
                 users.add(user);
             }
@@ -138,8 +135,7 @@ public class UserDaoJdbc implements UserDao {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setDate(4, user.getBirthday());
-            preparedStatement.setInt(5, user.getId());
+            preparedStatement.setInt(4, user.getId());
 
             preparedStatement.executeUpdate();
 
