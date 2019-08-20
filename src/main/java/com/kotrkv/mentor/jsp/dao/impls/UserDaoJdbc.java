@@ -1,7 +1,7 @@
 package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
-import com.kotrkv.mentor.jsp.dbservice.DBServiceJDBC;
+import com.kotrkv.mentor.jsp.service.DBServiceJDBC;
 import com.kotrkv.mentor.jsp.model.User;
 
 import java.sql.*;

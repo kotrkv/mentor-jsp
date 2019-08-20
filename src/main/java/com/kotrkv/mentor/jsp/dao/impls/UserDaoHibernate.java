@@ -2,7 +2,7 @@ package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
 import com.kotrkv.mentor.jsp.model.User;
-import com.kotrkv.mentor.jsp.dbservice.DBServiceHibernate;
+import com.kotrkv.mentor.jsp.service.DBServiceHibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

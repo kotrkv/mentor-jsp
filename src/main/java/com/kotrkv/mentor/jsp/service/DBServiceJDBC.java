@@ -1,4 +1,4 @@
-package com.kotrkv.mentor.jsp.dbservice;
+package com.kotrkv.mentor.jsp.service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

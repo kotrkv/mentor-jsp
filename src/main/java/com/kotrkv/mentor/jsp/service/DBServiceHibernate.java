@@ -1,4 +1,4 @@
-package com.kotrkv.mentor.jsp.dbservice;
+package com.kotrkv.mentor.jsp.service;
 
 import com.kotrkv.mentor.jsp.model.User;
 import org.hibernate.SessionFactory;
