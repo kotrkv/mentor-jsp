@@ -1,6 +1,7 @@
 package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
+import com.kotrkv.mentor.jsp.dbservice.DBServiceJDBC;
 import com.kotrkv.mentor.jsp.model.User;
 
 import java.sql.*;
@@ -31,16 +32,16 @@ public class UserDaoJdbc implements UserDao {
     private static final UserDaoJdbc INSTANCE = new UserDaoJdbc();
 
     private UserDaoJdbc() {
-        try {
-            String driver = "jdbc:postgresql://localhost:5432/mentor";
-            String user = "admin";
-            String password = "postgres";
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(driver, user, password);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            String driver = "jdbc:postgresql://localhost:5432/mentor";
+//            String user = "admin";
+//            String password = "postgres";
+//            Class.forName("org.postgresql.Driver");
+//            connection = DriverManager.getConnection(driver, user, password);
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 //    private UserDao() {
 //        Properties properties = new Properties();
@@ -63,7 +64,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public void create(User user) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT)) {
+        try (PreparedStatement preparedStatement = DBServiceJDBC.createConnection().prepareStatement(SQL_INSERT)) {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
@@ -75,7 +76,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public Optional<User> getById(Integer id) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID)) {
+        try (PreparedStatement preparedStatement = DBServiceJDBC.createConnection().prepareStatement(SQL_FIND_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -96,16 +97,15 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public List<User> getAll() {
-        try {
+        try (Statement statement = DBServiceJDBC.createConnection().createStatement()){
+
             List<User> users = new ArrayList<>();
-            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL);
             while (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
-                Date birthday = Date.valueOf(resultSet.getString("birthday"));
 
                 User user = new User(id, login, password, email);
 
@@ -119,7 +119,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public void delete(Integer id) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE)) {
+        try (PreparedStatement preparedStatement = DBServiceJDBC.createConnection().prepareStatement(SQL_DELETE)) {
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();
@@ -131,7 +131,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public void update(User user) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE)) {
+        try (PreparedStatement preparedStatement = DBServiceJDBC.createConnection().prepareStatement(SQL_UPDATE)) {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());

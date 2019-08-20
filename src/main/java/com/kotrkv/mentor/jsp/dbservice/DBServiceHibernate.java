@@ -19,8 +19,6 @@ public class DBServiceHibernate {
 
     private static Configuration getConfiguration() {
         Configuration configuration = new Configuration();
-//        configuration.addAnnotatedClass(Car.class);
-//        configuration.addAnnotatedClass(DailyReport.class);
         configuration.addAnnotatedClass(User.class);
 
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
@@ -30,7 +28,6 @@ public class DBServiceHibernate {
         configuration.setProperty("hibernate.connection.password", "postgres");
         configuration.setProperty("hibernate.show_sql", "true");
         configuration.setProperty("hibernate.current_session_context_class", "thread");
-        //configuration.setProperty("hibernate.hbm2ddl.auto", "create");
         return configuration;
     }
 
