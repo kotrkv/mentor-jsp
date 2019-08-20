@@ -1,4 +1,4 @@
-package com.kotrkv.mentor.jsp.util;
+package com.kotrkv.mentor.jsp.dbservice;
 
 import com.kotrkv.mentor.jsp.model.User;
 import org.hibernate.SessionFactory;
@@ -6,7 +6,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-public class HibernateUtil {
+public class DBServiceHibernate {
 
     private static SessionFactory sessionFactory;
 

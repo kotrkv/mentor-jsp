@@ -2,7 +2,7 @@ package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
 import com.kotrkv.mentor.jsp.model.User;
-import com.kotrkv.mentor.jsp.util.HibernateUtil;
+import com.kotrkv.mentor.jsp.dbservice.DBServiceHibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,7 +17,7 @@ public class UserDaoHibernate implements UserDao {
     private static final UserDaoHibernate INSTANCE = new UserDaoHibernate();
 
     private UserDaoHibernate() {
-        sessionFactory = HibernateUtil.getSessionFactory();
+        sessionFactory = DBServiceHibernate.getSessionFactory();
     }
 
     public static UserDaoHibernate getInstance() {
