@@ -1,9 +1,7 @@
 package com.kotrkv.mentor.jsp.service;
 
-import com.kotrkv.mentor.jsp.dao.Dao;
 import com.kotrkv.mentor.jsp.dao.UserDao;
 import com.kotrkv.mentor.jsp.dao.impls.UserDaoHibernate;
-import com.kotrkv.mentor.jsp.dao.impls.UserDaoJdbc;
 import com.kotrkv.mentor.jsp.model.User;
 
 import java.util.List;

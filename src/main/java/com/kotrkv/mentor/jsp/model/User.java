@@ -1,8 +1,6 @@
 package com.kotrkv.mentor.jsp.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.sql.Date;
 
 @Entity
 @Table(name = "users", schema = "jsp_project")

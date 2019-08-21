@@ -32,32 +32,7 @@ public class UserDaoJdbc implements UserDao {
     private static final UserDaoJdbc INSTANCE = new UserDaoJdbc();
 
     private UserDaoJdbc() {
-//        try {
-//            String driver = "jdbc:postgresql://localhost:5432/mentor";
-//            String user = "admin";
-//            String password = "postgres";
-//            Class.forName("org.postgresql.Driver");
-//            connection = DriverManager.getConnection(driver, user, password);
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
     }
-//    private UserDao() {
-//        Properties properties = new Properties();
-//        try {
-//            properties.load(new FileInputStream("resources/db.properties"));
-//
-//            String driver = properties.getProperty("db.url");
-//            String user = properties.getProperty("db.username");
-//            String password = properties.getProperty("db.password");
-//            Class.forName(properties.getProperty("db.driver"));
-//            connection = DriverManager.getConnection(driver, user, password);
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
     public static UserDaoJdbc getInstance() {
         return INSTANCE;
     }
