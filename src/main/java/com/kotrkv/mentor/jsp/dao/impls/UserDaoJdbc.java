@@ -1,6 +1,7 @@
 package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
+import com.kotrkv.mentor.jsp.service.DBHelper;
 import com.kotrkv.mentor.jsp.service.DBServiceJDBC;
 import com.kotrkv.mentor.jsp.model.User;
 
@@ -39,7 +40,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public void create(User user) {
-        try (PreparedStatement preparedStatement = DBServiceJDBC.createConnection().prepareStatement(SQL_INSERT)) {
+        try (PreparedStatement preparedStatement = DBHelper.getInstance().createConnection().prepareStatement(SQL_INSERT)) {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
@@ -51,7 +52,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public Optional<User> getById(Integer id) {
-        try (PreparedStatement preparedStatement = DBServiceJDBC.createConnection().prepareStatement(SQL_FIND_BY_ID)) {
+        try (PreparedStatement preparedStatement = DBHelper.getInstance().createConnection().prepareStatement(SQL_FIND_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -72,7 +73,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public List<User> getAll() {
-        try (Statement statement = DBServiceJDBC.createConnection().createStatement()){
+        try (Statement statement = DBHelper.getInstance().createConnection().createStatement()){
 
             List<User> users = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL);
@@ -94,7 +95,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public void delete(Integer id) {
-        try (PreparedStatement preparedStatement = DBServiceJDBC.createConnection().prepareStatement(SQL_DELETE)) {
+        try (PreparedStatement preparedStatement = DBHelper.getInstance().createConnection().prepareStatement(SQL_DELETE)) {
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();
@@ -106,7 +107,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public void update(User user) {
-        try (PreparedStatement preparedStatement = DBServiceJDBC.createConnection().prepareStatement(SQL_UPDATE)) {
+        try (PreparedStatement preparedStatement = DBHelper.getInstance().createConnection().prepareStatement(SQL_UPDATE)) {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());

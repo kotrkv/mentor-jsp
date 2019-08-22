@@ -1,23 +1,29 @@
 package com.kotrkv.mentor.jsp.service;
 
 import com.kotrkv.mentor.jsp.model.User;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
-public class DBServiceHibernate {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-    private static SessionFactory sessionFactory;
+public class DBHelper {
 
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            sessionFactory = createSessionFactory();
-        }
-        return sessionFactory;
+    private static final DBHelper INSTANCE = new DBHelper();
+
+    private DBHelper() {
+
     }
 
-    private static Configuration getConfiguration() {
+    public static DBHelper getInstance() {
+        return INSTANCE;
+    }
+
+    public Connection createConnection() {
+        return DBServiceJDBC.createConnection();
+    }
+
+    public Configuration createConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
 
@@ -29,13 +35,5 @@ public class DBServiceHibernate {
         configuration.setProperty("hibernate.show_sql", "true");
         configuration.setProperty("hibernate.current_session_context_class", "thread");
         return configuration;
-    }
-
-    private static SessionFactory createSessionFactory() {
-        Configuration configuration = getConfiguration();
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
     }
 }

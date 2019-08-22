@@ -1,7 +1,7 @@
 package com.kotrkv.mentor.jsp.service;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
-import com.kotrkv.mentor.jsp.dao.impls.UserDaoHibernate;
+import com.kotrkv.mentor.jsp.dao.UserDaoFactory;
 import com.kotrkv.mentor.jsp.model.User;
 
 import java.util.List;
@@ -11,8 +11,12 @@ public class UserService {
 
     private UserDao daoUser;
 
+    //public UserService() {
+    //    daoUser = UserDaoHibernate.getInstance();
+    //}
+
     public UserService() {
-        daoUser = UserDaoHibernate.getInstance();
+        daoUser = new UserDaoFactory().createUserDao();
     }
 
     public List<User> findAll() {
