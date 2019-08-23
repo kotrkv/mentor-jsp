@@ -2,7 +2,7 @@ package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
 import com.kotrkv.mentor.jsp.model.User;
-import com.kotrkv.mentor.jsp.service.DBServiceHibernate;
+import com.kotrkv.mentor.jsp.service.DBHelper;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,7 +17,7 @@ public class UserDaoHibernate implements UserDao {
     private static final UserDaoHibernate INSTANCE = new UserDaoHibernate();
 
     private UserDaoHibernate() {
-        sessionFactory = DBServiceHibernate.getSessionFactory();
+        sessionFactory = DBHelper.getInstance().createSessionFactory();
     }
 
     public static UserDaoHibernate getInstance() {
@@ -40,7 +40,6 @@ public class UserDaoHibernate implements UserDao {
             User user = session.get(User.class, id);
             return Optional.of(user);
         }
-//        return Optional.empty();
     }
 
     @Override

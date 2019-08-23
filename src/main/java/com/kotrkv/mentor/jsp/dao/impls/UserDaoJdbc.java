@@ -1,18 +1,18 @@
 package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
-import com.kotrkv.mentor.jsp.service.DBHelper;
-import com.kotrkv.mentor.jsp.service.DBServiceJDBC;
 import com.kotrkv.mentor.jsp.model.User;
+import com.kotrkv.mentor.jsp.service.DBHelper;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class UserDaoJdbc implements UserDao {
-
-    private Connection connection;
 
     //language=sql
     private final String SQL_INSERT =
@@ -34,6 +34,7 @@ public class UserDaoJdbc implements UserDao {
 
     private UserDaoJdbc() {
     }
+
     public static UserDaoJdbc getInstance() {
         return INSTANCE;
     }
@@ -73,7 +74,7 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public List<User> getAll() {
-        try (Statement statement = DBHelper.getInstance().createConnection().createStatement()){
+        try (Statement statement = DBHelper.getInstance().createConnection().createStatement()) {
 
             List<User> users = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL);

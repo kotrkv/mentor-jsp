@@ -11,10 +11,6 @@ public class UserService {
 
     private UserDao daoUser;
 
-    //public UserService() {
-    //    daoUser = UserDaoHibernate.getInstance();
-    //}
-
     public UserService() {
         daoUser = new UserDaoFactory().createUserDao();
     }
