@@ -6,6 +6,9 @@ import com.kotrkv.mentor.jsp.service.DBHelper;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,11 +20,19 @@ public class UserDaoHibernate implements UserDao {
     private static final UserDaoHibernate INSTANCE = new UserDaoHibernate();
 
     private UserDaoHibernate() {
-        sessionFactory = DBHelper.getInstance().createSessionFactory();
+        sessionFactory = createSessionFactory();
     }
 
     public static UserDaoHibernate getInstance() {
         return INSTANCE;
+    }
+
+    private static SessionFactory createSessionFactory() {
+        Configuration configuration = DBHelper.getInstance().createConfiguration();
+        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+        builder.applySettings(configuration.getProperties());
+        ServiceRegistry serviceRegistry = builder.build();
+        return configuration.buildSessionFactory(serviceRegistry);
     }
 
     @Override

@@ -8,16 +8,16 @@ import org.hibernate.service.ServiceRegistry;
 
 public class DBServiceHibernate {
 
-    private static SessionFactory sessionFactory;
+//    private static SessionFactory sessionFactory;
 
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            sessionFactory = createSessionFactory();
-        }
-        return sessionFactory;
-    }
+//    public static SessionFactory getSessionFactory() {
+//        if (sessionFactory == null) {
+//            sessionFactory = createSessionFactory();
+//        }
+//        return sessionFactory;
+//    }
 
-    private static Configuration getConfiguration() {
+    public static Configuration getConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
 
@@ -31,11 +31,11 @@ public class DBServiceHibernate {
         return configuration;
     }
 
-    private static SessionFactory createSessionFactory() {
-        Configuration configuration = getConfiguration();
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
-    }
+//    private static SessionFactory createSessionFactory() {
+//        Configuration configuration = getConfiguration();
+//        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+//        builder.applySettings(configuration.getProperties());
+//        ServiceRegistry serviceRegistry = builder.build();
+//        return configuration.buildSessionFactory(serviceRegistry);
+//    }
 }
