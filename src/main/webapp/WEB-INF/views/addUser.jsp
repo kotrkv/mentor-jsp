@@ -21,6 +21,12 @@
             <input type = "text" name = "email" placeholder = "Input email..." class="field-style field-full align-none"/>
         </li>
         <li>
+            <select name="role">
+                <option value="user">Пользователь</option>
+                <option value="admin">Администратор</option>
+            </select>
+        </li>
+        <li>
             <input type = "submit"/>
         </li>
     </ul>
