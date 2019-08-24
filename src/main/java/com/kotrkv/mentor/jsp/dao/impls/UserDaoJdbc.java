@@ -60,8 +60,9 @@ public class UserDaoJdbc implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
+                String role = resultSet.getString("role");
 
-                User user = new User(id, login, password, email);
+                User user = new User(id, login, password, email, role);
 
                 Optional<User> optionalUser = Optional.of(user);
                 return optionalUser;
@@ -83,8 +84,9 @@ public class UserDaoJdbc implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
+                String role = resultSet.getString("role");
 
-                User user = new User(id, login, password, email);
+                User user = new User(id, login, password, email, role);
 
                 users.add(user);
             }

@@ -19,22 +19,27 @@ public class User {
     @Column(name="email")
     private String email;
 
+    @Column(name="role")
+    private String role;
+
     public User() {
     }
 
-    public User(String login, String password, String email) {
+    public User(String login, String password, String email, String role) {
         this.id = COUNTER++;
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
+        this.role = role;
     }
 
-    public User(Integer id, String login, String password, String email) {
+    public User(Integer id, String login, String password, String email, String role) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -65,6 +70,14 @@ public class User {
         this.email = email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -72,6 +85,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

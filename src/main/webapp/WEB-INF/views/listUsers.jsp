@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css"/>
 </head>
 <body>
-<h3>Users...</h3>
 <a href="../../index.html"><-- Home</a>
+<h3>Users...</h3>
 <table class="form-style-9">
     <tr>
         <th>User login</th>
