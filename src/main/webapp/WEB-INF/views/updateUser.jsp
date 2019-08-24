@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add new user</title>
+    <title>Edit user</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css"/>
 </head>
 <body>
-<h3>Add new user...</h3>
+<h3>Edit user...</h3>
 <a href="../../index.html"><-- Home</a>
 <form action="/updateUser" method="post" class="form-style-9">
     <ul>

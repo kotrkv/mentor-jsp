@@ -103,7 +103,7 @@ td, th {
 #button {
     width: 12em;
     border-right: 1px solid #000;
-    padding: 0 0 1em 0;
+    padding: 0 0 0 0;
     margin-bottom: 1em;
     font-family: 'Trebuchet MS', 'Lucida Grande',
     Verdana, Lucida, Geneva, Helvetica,
