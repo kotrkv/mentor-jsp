@@ -24,6 +24,9 @@ public class UserDaoJdbc implements UserDao {
     private final String SQL_FIND_BY_ID =
             "SELECT * FROM jsp_project.users WHERE id = ?";
 
+    private final String SQL_FIND_BY_LOGIN_AND_PASSWORD =
+            "SELECT * FROM jsp_project.users WHERE login = ? AND password = ?";
+
     private final String SQL_UPDATE =
             "UPDATE jsp_project.users SET login = ?, password = ?, email = ? WHERE id = ?";
 
@@ -63,6 +66,28 @@ public class UserDaoJdbc implements UserDao {
                 String role = resultSet.getString("role");
 
                 User user = new User(id, login, password, email, role);
+
+                Optional<User> optionalUser = Optional.of(user);
+                return optionalUser;
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Optional<User> getByLoginAndPassword(String login, String password) {
+        try (PreparedStatement preparedStatement = DBHelper.getInstance().createConnection().prepareStatement(SQL_FIND_BY_ID)) {
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(1, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                User user = new User(resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5));
 
                 Optional<User> optionalUser = Optional.of(user);
                 return optionalUser;

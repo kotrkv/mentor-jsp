@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Error</title>
+    <title>User</title>
 </head>
 <body>
-    <h3><%= request.getAttribute("error") %></h3>
+<h3>Hello ,${user.login} </h3>
 </body>
 </html>

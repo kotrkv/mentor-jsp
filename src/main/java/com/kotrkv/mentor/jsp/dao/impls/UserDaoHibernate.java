@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
 import java.util.List;
@@ -50,6 +51,18 @@ public class UserDaoHibernate implements UserDao {
             Transaction transaction = session.beginTransaction();
             User user = session.get(User.class, id);
             return Optional.of(user);
+        }
+    }
+
+    @Override
+    public Optional<User> getByLoginAndPassword(String login, String password) {
+        try (Session session = sessionFactory.getCurrentSession()) {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM User u WHERE u.login = :login AND u.password = :password");
+            query.setParameter("login", login);
+            query.setParameter("password", password);
+            List<User> users = (List<User>)query.getResultList();
+            return users.size() > 0 ? Optional.of((User)query.getSingleResult()) : Optional.empty();
         }
     }
 

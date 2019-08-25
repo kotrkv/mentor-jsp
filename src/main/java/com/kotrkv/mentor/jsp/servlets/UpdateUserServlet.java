@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/updateUser")
+@WebServlet("/admin/editUser")
 public class UpdateUserServlet extends HttpServlet {
 
     UserService service;
@@ -24,7 +24,7 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = service.findById(Integer.parseInt(req.getParameter("id"))).get();
         req.setAttribute("user", user);
-        req.getRequestDispatcher("/WEB-INF/views/updateUser.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/editUser.jsp").forward(req, resp);
     }
 
     @Override

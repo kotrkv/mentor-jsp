@@ -4,12 +4,12 @@
 <html>
 <head>
     <title>Edit user</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" type="text/css"/>
 </head>
 <body>
-<h3>Edit user...</h3>
 <a href="../../index.html"><-- Home</a>
-<form action="/updateUser" method="post" class="form-style-9">
+<h3>Edit user...</h3>
+<form action="/editUser" method="post" class="form-style-9">
     <ul>
 
         <input type="hidden" name="id" value="${user.id}">
@@ -21,6 +21,9 @@
         </li>
         <li>
             <input type = "text" name = "email" value = "${user.email}" class="field-style field-full align-none"/>
+        </li>
+        <li>
+            <input type = "text" name = "email" value = "${user.role}" class="field-style field-full align-none"/>
         </li>
         <li>
             <input type = "submit"/>

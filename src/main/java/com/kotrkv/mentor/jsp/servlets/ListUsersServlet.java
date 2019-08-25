@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/users")
+@WebServlet("/admin/users")
 public class ListUsersServlet extends HttpServlet {
 
-    UserService service;
+    private UserService service;
 
     @Override
     public void init() throws ServletException {
