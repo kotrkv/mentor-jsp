@@ -23,16 +23,13 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        List<User> list = service.findAll();
-//        req.setAttribute("users", list);
-//        req.getRequestDispatcher("/WEB-INF/views/listUsers.jsp").forward(req, resp);
+        List<User> list = service.findAll();
+        req.setAttribute("users", list);
+        req.getRequestDispatcher("/WEB-INF/views/listUsers.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> list = service.findAll();
-        req.setAttribute("users", list);
-        req.getRequestDispatcher("/WEB-INF/views/listUsers.jsp").forward(req, resp);
-
+        doGet(req, resp);
     }
 }

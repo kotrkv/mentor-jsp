@@ -12,7 +12,7 @@ public class DBServiceJDBC {
     public static Connection createConnection() {
         try {
             String driver = "jdbc:postgresql://localhost:5432/mentor";
-            String user = "postgres";
+            String user = "admin";
             String password = "postgres";
             Class.forName("org.postgresql.Driver");
             return DriverManager.getConnection(driver, user, password);

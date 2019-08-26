@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 //@WebFilter({"/login", "/admin/*", "/user"})
@@ -32,12 +33,34 @@ public class AuthFilter implements Filter {
         String login = httpServletRequest.getParameter("login");
         String password = httpServletRequest.getParameter("password");
 
+        HttpSession session = httpServletRequest.getSession();
+        System.out.println("Session - " + session.getAttribute("user"));
+        System.out.println("Login - " + login + ", password - " + password);
+
         if (login != null && password != null) {
-            User user = userService.findByLoginAndPassword(login, password).get();
-            System.out.println(user);
+
+            if (userService.findByLoginAndPassword(login, password).isPresent()) {
+                User user = userService.findByLoginAndPassword(login, password).get();
+
+                httpServletRequest.getSession().setAttribute("user", user);
+
+                if (user.getRole().equalsIgnoreCase("user")) {
+//                    httpServletRequest.setAttribute("user", user);
+//                    httpServletRequest.getRequestDispatcher("/user").forward(servletRequest, servletResponse);
+                    httpServletResponse.sendRedirect("/user");
+                    return;
+                }
+                if (user.getRole().equalsIgnoreCase("admin")) {
+//                    httpServletRequest.setAttribute("user", user);
+//                    httpServletRequest.getRequestDispatcher("/admin").forward(servletRequest, servletResponse);
+                    httpServletResponse.sendRedirect("/admin");
+                    return;
+                }
+            }
         }
 
-//        httpServletResponse.sendRedirect("/login");
+        User user = (User)httpServletRequest.getSession().getAttribute("user");
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
