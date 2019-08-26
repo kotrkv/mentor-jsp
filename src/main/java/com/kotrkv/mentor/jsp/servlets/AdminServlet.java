@@ -25,11 +25,11 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> list = service.findAll();
         req.setAttribute("users", list);
-        req.getRequestDispatcher("/WEB-INF/views/listUsers.jsp").forward(req, resp);
+        req.getServletContext().getRequestDispatcher("/WEB-INF/views/listUsers.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        resp.sendRedirect("/admin");
     }
 }

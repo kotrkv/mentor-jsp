@@ -20,6 +20,6 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(req, resp);
+        resp.sendRedirect("/user");
     }
 }

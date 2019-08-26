@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebFilter({"/login", "/admin/*", "/user"})
-@WebFilter("/*")
+@WebFilter({"/admin", "/admin/*"})
 public class AuthFilter implements Filter {
 
     private UserService userService;
@@ -22,46 +21,28 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        System.out.println("------>>>> Filter is work....");
 
-        final HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        final HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+        HttpServletRequest request = (HttpServletRequest)servletRequest;
+        HttpServletResponse response = (HttpServletResponse)servletResponse;
 
-        String uri = httpServletRequest.getRequestURI();
+        HttpSession session = request.getSession(false);
 
-        System.out.println("uri - " + uri);
-
-        String login = httpServletRequest.getParameter("login");
-        String password = httpServletRequest.getParameter("password");
-
-        HttpSession session = httpServletRequest.getSession();
-        System.out.println("Session - " + session.getAttribute("user"));
-        System.out.println("Login - " + login + ", password - " + password);
-
-        if (login != null && password != null) {
-
-            if (userService.findByLoginAndPassword(login, password).isPresent()) {
-                User user = userService.findByLoginAndPassword(login, password).get();
-
-                httpServletRequest.getSession().setAttribute("user", user);
-
-                if (user.getRole().equalsIgnoreCase("user")) {
-//                    httpServletRequest.setAttribute("user", user);
-//                    httpServletRequest.getRequestDispatcher("/user").forward(servletRequest, servletResponse);
-                    httpServletResponse.sendRedirect("/user");
-                    return;
-                }
-                if (user.getRole().equalsIgnoreCase("admin")) {
-//                    httpServletRequest.setAttribute("user", user);
-//                    httpServletRequest.getRequestDispatcher("/admin").forward(servletRequest, servletResponse);
-                    httpServletResponse.sendRedirect("/admin");
-                    return;
-                }
-            }
+        if (session == null || session.getAttribute("user") == null) {
+            servletRequest.getServletContext().getRequestDispatcher("/login").forward(request, response);
         }
 
-        User user = (User)httpServletRequest.getSession().getAttribute("user");
+        User user = (User)session.getAttribute("user");
 
-        filterChain.doFilter(servletRequest, servletResponse);
+        System.out.println("Filter role is " + user.getRole());
+
+        if (!user.getRole().equalsIgnoreCase("admin")) {
+            System.out.println("----->>>> Not admin role....");
+            ((HttpServletResponse) servletResponse).sendRedirect("/user");
+            return;
+        }
+
+        filterChain.doFilter(request, response);
     }
 
     @Override

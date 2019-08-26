@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" type="text/css"/>
 </head>
 <body>
-<a href="../../index.html"><-- Home</a>
+<a href="../../index.jsp"><-- Home</a>
 <h3>Add user...</h3>
-<form class="form-style-9">
+<form action="/admin/addUser" method="post" class="form-style-9">
     <ul>
         <li>
             <input type = "text" name = "login" required placeholder = "Input login..." class="field-style field-full align-none"/>

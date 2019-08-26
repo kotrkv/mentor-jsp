@@ -12,7 +12,7 @@ public class DBServiceHibernate {
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
         configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
         configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/mentor");
-        configuration.setProperty("hibernate.connection.username", "admin");
+        configuration.setProperty("hibernate.connection.username", "postgres");
         configuration.setProperty("hibernate.connection.password", "postgres");
         configuration.setProperty("hibernate.show_sql", "true");
         configuration.setProperty("hibernate.current_session_context_class", "thread");

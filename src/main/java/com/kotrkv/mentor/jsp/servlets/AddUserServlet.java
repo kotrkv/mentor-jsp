@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/addUser", name = "addUserServlet")
+@WebServlet("/admin/addUser")
 public class AddUserServlet extends HttpServlet {
 
     UserService service;
@@ -34,7 +34,7 @@ public class AddUserServlet extends HttpServlet {
             String email = req.getParameter("email");
             String role = req.getParameter("role");
             service.add(new User(login, password, email, role));
-            resp.sendRedirect("/users");
+            resp.sendRedirect("/admin/users");
         } catch (Exception e) {
             req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);

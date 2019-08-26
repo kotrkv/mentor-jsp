@@ -22,7 +22,7 @@ public class DeleteUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id"));
         service.delete(id);
-        resp.sendRedirect("/users");
+        resp.sendRedirect("/admin/users");
     }
 
     @Override

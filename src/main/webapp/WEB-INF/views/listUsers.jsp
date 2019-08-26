@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" type="text/css"/>
 </head>
 <body>
-<a href="../../index.html"><-- Home</a>
+<a href="../../index.jsp"><-- Home</a>
 <h3>Users...</h3>
 <table class="form-style-9">
+    <tr><th class="link"><a href="/admin/addUser">Add user</a></th></tr>
     <tr>
         <th>User login</th>
         <th>User password</th>
@@ -23,8 +24,8 @@
             <td>${user.password}</td>
             <td>${user.email}</td>
             <td>${user.role}</td>
-            <td><a href="updateUser?id=${user.id}">Edit</a></td>
-            <td><a href="deleteUser?id=${user.id}">Remove</a></td>
+            <td><a href="/admin/editUser?id=${user.id}">Edit</a></td>
+            <td><a href="/admin/deleteUser?id=${user.id}">Remove</a></td>
         </tr>
     </c:forEach>
 </table>

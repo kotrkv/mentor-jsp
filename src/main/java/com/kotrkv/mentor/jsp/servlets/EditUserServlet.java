@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/admin/editUser")
-public class UpdateUserServlet extends HttpServlet {
+public class EditUserServlet extends HttpServlet {
 
     UserService service;
 
@@ -37,7 +37,7 @@ public class UpdateUserServlet extends HttpServlet {
             user.setPassword(req.getParameter("password"));
             user.setEmail(req.getParameter("email"));
             service.update(user);
-            resp.sendRedirect("/users");
+            resp.sendRedirect("/admin/users");
         } catch (Exception e) {
             req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);

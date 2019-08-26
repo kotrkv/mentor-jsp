@@ -6,16 +6,6 @@
     <link rel="stylesheet" href="/resources/css/styles.css" type="text/css"/>
 </head>
 <body>
-<div id="button">
-    <ul>
-        <li>
-            <a href="/addUser">Add user</a>
-        </li>
-        <li>
-            <a href="/users">List users</a>
-        </li>
-    </ul>
-</div>
 <h3>Welcome</h3>
 <form action="/login" method="post" class="form-style-9">
     <ul>

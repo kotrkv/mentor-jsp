@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" type="text/css"/>
 </head>
 <body>
-<a href="../../index.html"><-- Home</a>
+<a href="../../index.jsp"><-- Home</a>
 <h3>Edit user...</h3>
-<form action="/editUser" method="post" class="form-style-9">
+<form action="/admin/editUser" method="post" class="form-style-9">
     <ul>
 
         <input type="hidden" name="id" value="${user.id}">
