@@ -1,16 +1,15 @@
-package com.kotrkv.mentor.jsp.servlets;
+package com.kotrkv.mentor.jsp.servlets_;
 
 import com.kotrkv.mentor.jsp.model.User;
 import com.kotrkv.mentor.jsp.service.UserService;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/admin/addUser")
+//@WebServlet("/admin/addUser")
 public class AddUserServlet extends HttpServlet {
 
     UserService service;

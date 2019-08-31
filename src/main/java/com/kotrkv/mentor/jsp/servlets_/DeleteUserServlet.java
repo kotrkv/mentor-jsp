@@ -1,20 +1,16 @@
-package com.kotrkv.mentor.jsp.servlets;
+package com.kotrkv.mentor.jsp.servlets_;
 
-import com.kotrkv.mentor.jsp.model.User;
 import com.kotrkv.mentor.jsp.service.UserService;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/admin/users")
-public class ListUsersServlet extends HttpServlet {
-
-    private UserService service;
+//@WebServlet("/admin/deleteUser")
+public class DeleteUserServlet extends HttpServlet {
+    UserService service;
 
     @Override
     public void init() throws ServletException {
@@ -23,8 +19,13 @@ public class ListUsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> list = service.findAll();
-        req.setAttribute("users", list);
-        req.getRequestDispatcher("/WEB-INF/views/listUsers.jsp").forward(req, resp);
+        Integer id = Integer.parseInt(req.getParameter("id"));
+        service.delete(id);
+        resp.sendRedirect("/admin/users");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     }
 }
