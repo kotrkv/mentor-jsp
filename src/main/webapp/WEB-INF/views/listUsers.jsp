@@ -10,7 +10,7 @@
 <a href="/"><-- Home</a>
 <h3>Users...</h3>
 <table class="form-style-9">
-    <tr><th class="link"><a href="/admin/addUser">Add user</a></th></tr>
+    <tr><th><a href="/admin/addUser" calss="link">Add user</a></th></tr>
     <tr>
         <th>User login</th>
         <th>User password</th>

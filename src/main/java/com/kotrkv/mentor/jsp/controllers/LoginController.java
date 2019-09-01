@@ -37,11 +37,9 @@ public class LoginController {
             if (user.getRole().equalsIgnoreCase("admin")) {
                 return "redirect:/admin";
             } else {
-                System.out.println("------>>>> /user");
                 return "redirect:/user";
             }
         } else {
-            System.out.println("redirect:/login");
             return "redirect:/error";
         }
     }

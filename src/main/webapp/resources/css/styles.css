@@ -9,7 +9,6 @@
     margin: 50px auto;
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
     border-radius: 10px;
-    border: 6px solid #305A72;
 }
 .form-style-9 ul{
     padding:0;
@@ -88,7 +87,8 @@ tbody {
 tr:nth-of-type(odd) {
     background: #eee;
 }
-th {
+
+th .link{
     text-align: center;
     background: #333;
     color: white;
@@ -99,6 +99,13 @@ td, th {
     padding: 6px;
     border: 1px solid #ccc;
     text-align: center;
+}
+
+th {
+    text-align: center;
+    background: #333;
+    color: white;
+    font-weight: bold;
 }
 
 #button {
