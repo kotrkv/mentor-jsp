@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" type="text/css"/>
 </head>
 <body>
-<a href="../../index.jsp"><-- Home</a>
+<a href="/"><-- Home</a>
 <h3>Users...</h3>
 <table class="form-style-9">
     <tr><th class="link"><a href="/admin/addUser">Add user</a></th></tr>

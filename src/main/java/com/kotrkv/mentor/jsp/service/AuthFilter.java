@@ -21,8 +21,6 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("------>>>> Filter is work....");
-
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
 
@@ -34,14 +32,10 @@ public class AuthFilter implements Filter {
 
         User user = (User)session.getAttribute("user");
 
-        System.out.println("Filter role is " + user.getRole());
-
         if (!user.getRole().equalsIgnoreCase("admin")) {
-            System.out.println("----->>>> Not admin role....");
             ((HttpServletResponse) servletResponse).sendRedirect("/user");
             return;
         }
-
         filterChain.doFilter(request, response);
     }
 

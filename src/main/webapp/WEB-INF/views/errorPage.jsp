@@ -4,6 +4,8 @@
     <title>Error</title>
 </head>
 <body>
-    <h3><%= request.getAttribute("error") %></h3>
+<a href="/"><-- Home</a>
+<h3><%= request.getAttribute("error") %>
+</h3>
 </body>
 </html>

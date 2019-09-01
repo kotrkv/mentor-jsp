@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" type="text/css"/>
 </head>
 <body>
-<a href="../../index.jsp"><-- Home</a>
+<a href="/"><-- Home</a>
 <h3>Edit user...</h3>
 <form action="/admin/editUser" method="post" class="form-style-9">
     <ul>
-
         <input type="hidden" name="id" value="${user.id}">
         <li>
             <input type = "text" name = "login" value = "${user.login}" class="field-style field-full align-none"/>
@@ -30,6 +29,5 @@
         </li>
     </ul>
 </form>
-
 </body>
 </html>
