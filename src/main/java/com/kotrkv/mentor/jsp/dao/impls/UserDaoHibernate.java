@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,7 +16,6 @@ public class UserDaoHibernate implements UserDao {
 
     private final SessionFactory sessionFactory;
 
-    @Autowired
     public UserDaoHibernate(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -34,7 +32,6 @@ public class UserDaoHibernate implements UserDao {
     @Override
     public Optional<User> getById(Integer id) {
         try (Session session = sessionFactory.getCurrentSession()) {
-            Transaction transaction = session.beginTransaction();
             User user = session.get(User.class, id);
             return Optional.of(user);
         }
@@ -43,7 +40,6 @@ public class UserDaoHibernate implements UserDao {
     @Override
     public Optional<User> getByLoginAndPassword(String login, String password) {
         try (Session session = sessionFactory.getCurrentSession()) {
-            Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("FROM User u WHERE u.login = :login AND u.password = :password");
             query.setParameter("login", login);
             query.setParameter("password", password);

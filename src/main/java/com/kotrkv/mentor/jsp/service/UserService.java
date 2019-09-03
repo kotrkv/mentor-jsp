@@ -18,11 +18,6 @@ public class UserService {
 
     }
 
-//    @Autowired
-//    public UserService(UserDao userDao) {
-//        this.daoUser = userDao;
-//    }
-
     public List<User> findAll() {
         return daoUser.getAll();
     }
