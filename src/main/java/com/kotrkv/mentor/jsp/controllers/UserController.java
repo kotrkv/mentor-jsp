@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+import java.util.Map;
+
 @Controller
 public class UserController {
 
@@ -16,6 +19,36 @@ public class UserController {
 
     public UserController() {
         userService = new UserService();
+    }
+
+    @GetMapping("/")
+    public String login() {
+        return "index";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam Map<String, String> allParams, HttpSession session, Model model) {
+        String login = allParams.get("login");
+        String password = allParams.get("password");
+
+        if (userService.findByLoginAndPassword(login, password).isPresent()) {
+            User user = userService.findByLoginAndPassword(login, password).get();
+            session.setAttribute("user", user);
+
+            if (user.getRole().equalsIgnoreCase("admin")) {
+                return "redirect:/admin";
+            } else {
+                return "redirect:/user";
+            }
+        } else {
+            return "redirect:/error";
+        }
+    }
+
+    @GetMapping("/error")
+    public String error(Model model) {
+        model.addAttribute("error", "User not found");
+        return "errorPage";
     }
 
     @GetMapping("/admin")

@@ -1,6 +1,5 @@
 package com.kotrkv.mentor.jsp.service;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.sql.Connection;
@@ -14,10 +13,6 @@ public class DBHelper {
 
     public static DBHelper getInstance() {
         return INSTANCE;
-    }
-
-    public Connection createConnection() {
-        return DBServiceJDBC.createConnection();
     }
 
     public Configuration createConfiguration() {

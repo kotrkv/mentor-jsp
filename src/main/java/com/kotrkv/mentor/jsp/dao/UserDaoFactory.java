@@ -1,7 +1,6 @@
 package com.kotrkv.mentor.jsp.dao;
 
 import com.kotrkv.mentor.jsp.dao.impls.UserDaoHibernate;
-import com.kotrkv.mentor.jsp.dao.impls.UserDaoJdbc;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -10,7 +9,7 @@ public class UserDaoFactory {
 
     public UserDao createUserDao() {
         String type = loadTypeDao();
-        return type.equalsIgnoreCase("jdbc") ? UserDaoJdbc.getInstance() : UserDaoHibernate.getInstance();
+        return type.equalsIgnoreCase("hibernate") ? UserDaoHibernate.getInstance() : null;
     }
 
     private String loadTypeDao() {
