@@ -5,6 +5,8 @@ import org.hibernate.cfg.Configuration;
 
 public class DBServiceHibernate {
 
+    public DBServiceHibernate() {}
+
     public static Configuration getConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
@@ -18,5 +20,4 @@ public class DBServiceHibernate {
         configuration.setProperty("hibernate.current_session_context_class", "thread");
         return configuration;
     }
-
 }

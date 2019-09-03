@@ -9,7 +9,7 @@ public class UserDaoFactory {
 
     public UserDao createUserDao() {
         String type = loadTypeDao();
-        return type.equalsIgnoreCase("hibernate") ? UserDaoHibernate.getInstance() : null;
+        return type.equalsIgnoreCase("hibernate") ? new UserDaoHibernate() : null;
     }
 
     private String loadTypeDao() {

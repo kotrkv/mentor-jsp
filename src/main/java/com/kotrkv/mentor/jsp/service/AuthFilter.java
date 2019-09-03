@@ -12,11 +12,8 @@ import java.io.IOException;
 @WebFilter({"/admin", "/admin/*"})
 public class AuthFilter implements Filter {
 
-    private UserService userService;
-
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        userService = new UserService();
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override

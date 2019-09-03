@@ -10,25 +10,21 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class UserDaoHibernate implements UserDao {
 
     private SessionFactory sessionFactory;
 
-    private static final UserDaoHibernate INSTANCE = new UserDaoHibernate();
-
-    private UserDaoHibernate() {
+    public UserDaoHibernate() {
         sessionFactory = createSessionFactory();
     }
 
-    public static UserDaoHibernate getInstance() {
-        return INSTANCE;
-    }
-
-    private static SessionFactory createSessionFactory() {
+    private SessionFactory createSessionFactory() {
         Configuration configuration = DBHelper.getInstance().createConfiguration();
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());

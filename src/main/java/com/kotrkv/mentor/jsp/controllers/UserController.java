@@ -2,6 +2,7 @@ package com.kotrkv.mentor.jsp.controllers;
 
 import com.kotrkv.mentor.jsp.model.User;
 import com.kotrkv.mentor.jsp.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +16,8 @@ import java.util.Map;
 @Controller
 public class UserController {
 
+    @Autowired
     private UserService userService;
-
-    public UserController() {
-        userService = new UserService();
-    }
 
     @GetMapping("/")
     public String login() {
@@ -27,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam Map<String, String> allParams, HttpSession session, Model model) {
+    public String login(@RequestParam Map<String, String> allParams, HttpSession session) {
         String login = allParams.get("login");
         String password = allParams.get("password");
 
@@ -45,29 +43,15 @@ public class UserController {
         }
     }
 
-    @GetMapping("/error")
-    public String error(Model model) {
-        model.addAttribute("error", "User not found");
-        return "errorPage";
-    }
-
     @GetMapping("/admin")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.findAll());
         return "/listUsers";
     }
 
-    @PostMapping("/admin/editUser")
-    public String editForm(@RequestParam("id") Integer id,
-                           @RequestParam("login") String login,
-                           @RequestParam("password") String password,
-                           @RequestParam("email") String email){
-        User user = userService.findById(id).get();
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setEmail(email);
-        userService.update(user);
-        return "redirect:/admin";
+    @GetMapping("/user")
+    public String user() {
+        return "user";
     }
 
     @GetMapping("/admin/editUser")
@@ -77,8 +61,21 @@ public class UserController {
         return "/editUser";
     }
 
+    @PostMapping("/admin/editUser")
+    public String editForm(@RequestParam("id") Integer id,
+                           @RequestParam("login") String login,
+                           @RequestParam("password") String password,
+                           @RequestParam("email") String email) {
+        User user = userService.findById(id).get();
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setEmail(email);
+        userService.update(user);
+        return "redirect:/admin";
+    }
+
     @GetMapping("/admin/addUser")
-    public String addForm(){
+    public String addForm() {
         return "/addUser";
     }
 
@@ -88,14 +85,15 @@ public class UserController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/user")
-    public String user() {
-        return "user";
-    }
-
     @GetMapping("/admin/deleteUser")
     public String delete(@RequestParam Integer id) {
         userService.delete(id);
         return "redirect:/admin";
+    }
+
+    @GetMapping("/error")
+    public String error(Model model) {
+        model.addAttribute("error", "User not found");
+        return "errorPage";
     }
 }

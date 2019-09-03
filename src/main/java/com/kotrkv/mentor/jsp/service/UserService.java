@@ -1,19 +1,27 @@
 package com.kotrkv.mentor.jsp.service;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
-import com.kotrkv.mentor.jsp.dao.UserDaoFactory;
 import com.kotrkv.mentor.jsp.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserService {
 
+    @Autowired
     private UserDao daoUser;
 
     public UserService() {
-        daoUser = new UserDaoFactory().createUserDao();
+
     }
+
+//    @Autowired
+//    public UserService(UserDao userDao) {
+//        this.daoUser = userDao;
+//    }
 
     public List<User> findAll() {
         return daoUser.getAll();
