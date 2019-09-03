@@ -1,16 +1,14 @@
 package com.kotrkv.mentor.jsp.dao;
 
-import com.kotrkv.mentor.jsp.dao.impls.UserDaoHibernate;
-
 import java.io.InputStream;
 import java.util.Properties;
 
 public class UserDaoFactory {
 
-    public UserDao createUserDao() {
-        String type = loadTypeDao();
-        return type.equalsIgnoreCase("hibernate") ? new UserDaoHibernate() : null;
-    }
+//    public UserDao createUserDao() {
+//        String type = loadTypeDao();
+//        return type.equalsIgnoreCase("hibernate") ? new UserDaoHibernate() : null;
+//    }
 
     private String loadTypeDao() {
         try {

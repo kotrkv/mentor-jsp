@@ -2,14 +2,11 @@ package com.kotrkv.mentor.jsp.dao.impls;
 
 import com.kotrkv.mentor.jsp.dao.UserDao;
 import com.kotrkv.mentor.jsp.model.User;
-import com.kotrkv.mentor.jsp.service.DBHelper;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import org.hibernate.service.ServiceRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,18 +15,11 @@ import java.util.Optional;
 @Repository
 public class UserDaoHibernate implements UserDao {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
-    public UserDaoHibernate() {
-        sessionFactory = createSessionFactory();
-    }
-
-    private SessionFactory createSessionFactory() {
-        Configuration configuration = DBHelper.getInstance().createConfiguration();
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
+    @Autowired
+    public UserDaoHibernate(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
