@@ -8,10 +8,12 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Transactional
 public class UserDaoHibernate implements UserDao {
 
     private final SessionFactory sessionFactory;
@@ -23,9 +25,7 @@ public class UserDaoHibernate implements UserDao {
     @Override
     public void create(User user) {
         try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
             session.save(user);
-            transaction.commit();
         }
     }
 
@@ -52,9 +52,7 @@ public class UserDaoHibernate implements UserDao {
     public List<User> getAll() {
         List<User> users;
         try (Session session = sessionFactory.getCurrentSession()) {
-            Transaction transaction = session.beginTransaction();
             users = session.createQuery("from User", User.class).getResultList();
-            transaction.commit();
         }
         return users;
     }
@@ -62,21 +60,17 @@ public class UserDaoHibernate implements UserDao {
     @Override
     public void delete(Integer id) {
         try (Session session = sessionFactory.getCurrentSession()) {
-            Transaction transaction = session.beginTransaction();
             User user = session.get(User.class, id);
             if (user != null) {
                 session.delete(user);
             }
-            transaction.commit();
         }
     }
 
     @Override
     public void update(User user) {
         try (Session session = sessionFactory.getCurrentSession()) {
-            Transaction transaction = session.beginTransaction();
             session.saveOrUpdate(user);
-            transaction.commit();
         }
     }
 }
