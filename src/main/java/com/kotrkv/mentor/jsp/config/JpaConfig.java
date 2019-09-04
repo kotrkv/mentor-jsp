@@ -44,14 +44,13 @@ public class JpaConfig {
                 "org.hibernate.dialect.PostgreSQL95Dialect");
         properties.setProperty("hibernate.show_sql",
                 "true");
-        //properties.setProperty("hibernate.hbm2ddl.auto", "update");
         return properties;
     }
 
     @Bean
     public DataSource dataSource(@Value("org.postgresql.Driver") String driver,
                                  @Value("jdbc:postgresql://localhost:5432/mentor") String url,
-                                 @Value("admin") String user,
+                                 @Value("postgres") String user,
                                  @Value("postgres") String password) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(driver);
