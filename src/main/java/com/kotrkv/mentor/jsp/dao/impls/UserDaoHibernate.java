@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository
 @Transactional
 public class UserDaoHibernate implements UserDao {
 
