@@ -9,6 +9,7 @@ public interface UserDao {
     void create(User user);
     Optional<User> getById(Integer id);
     Optional<User> getByLoginAndPassword(String login, String password);
+    Optional<User> getByLogin(String login);
     List<User> getAll();
     void delete(Integer id);
     void update(User user);

@@ -23,7 +23,11 @@
             <td>${user.login}</td>
             <td>${user.password}</td>
             <td>${user.email}</td>
-            <td>${user.role}</td>
+            <td>
+                <c:forEach var="role" items="${user.roles}">
+                    ${role.name}
+                </c:forEach>
+            </td>
             <td><a href="/admin/editUser?id=${user.id}">Edit</a></td>
             <td><a href="/admin/deleteUser?id=${user.id}">Remove</a></td>
         </tr>

@@ -1,6 +1,7 @@
 package com.kotrkv.mentor.jsp.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users", schema = "jsp_project")
@@ -19,27 +20,29 @@ public class User {
     @Column(name="email")
     private String email;
 
-    @Column(name="role")
-    private String role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(schema = "jsp_project", name="user_role", joinColumns = @JoinColumn(name="user_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(String login, String password, String email, String role) {
+    public User(String login, String password, String email, Set<Role> role) {
         this.id = COUNTER++;
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.roles = role;
     }
 
-    public User(Integer id, String login, String password, String email, String role) {
+    public User(Integer id, String login, String password, String email, Set<Role> role) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.roles = role;
     }
 
     public Integer getId() {
@@ -70,12 +73,12 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -85,7 +88,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
+                ", role='" + roles + '\'' +
                 '}';
     }
 }

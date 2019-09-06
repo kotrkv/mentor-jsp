@@ -29,10 +29,10 @@ public class AuthFilter implements Filter {
 
         User user = (User)session.getAttribute("user");
 
-        if (!user.getRole().equalsIgnoreCase("admin")) {
-            ((HttpServletResponse) servletResponse).sendRedirect("/user");
-            return;
-        }
+//        if (!user.getRole().equalsIgnoreCase("admin")) {
+//            ((HttpServletResponse) servletResponse).sendRedirect("/user");
+//            return;
+//        }
         filterChain.doFilter(request, response);
     }
 

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 @ComponentScan(value = "com.kotrkv.mentor.jsp")
 public class WebConfig implements WebMvcConfigurer {
 

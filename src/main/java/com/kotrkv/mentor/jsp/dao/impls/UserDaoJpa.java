@@ -38,6 +38,14 @@ public class UserDaoJpa implements UserDao {
     }
 
     @Override
+    public Optional<User> getByLogin(String login) {
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.login = :login", User.class);
+        query.setParameter("login", login);
+        List<User> users = query.getResultList();
+        return users.size() > 0 ? Optional.of((User)query.getSingleResult()) : Optional.empty();
+    }
+
+    @Override
     public List<User> getAll() {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }

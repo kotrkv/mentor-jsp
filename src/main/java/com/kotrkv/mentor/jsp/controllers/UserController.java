@@ -24,8 +24,9 @@ public class UserController {
         return "index";
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public String login(@RequestParam Map<String, String> allParams, HttpSession session) {
+        System.out.println("---------------2222222222222");
         String login = allParams.get("login");
         String password = allParams.get("password");
 
@@ -33,7 +34,10 @@ public class UserController {
             User user = userService.findByLoginAndPassword(login, password).get();
             session.setAttribute("user", user);
 
-            if (user.getRole().equalsIgnoreCase("admin")) {
+            System.out.println("/login");
+
+            if (user.getRoles().stream().anyMatch(x -> x.getName().equalsIgnoreCase("admin"))) {
+                System.out.println("after login");
                 return "redirect:/admin";
             } else {
                 return "redirect:/user";
@@ -45,6 +49,7 @@ public class UserController {
 
     @GetMapping("/admin")
     public String getUsers(Model model) {
+        System.out.println("/admin");
         model.addAttribute("users", userService.findAll());
         return "/listUsers";
     }

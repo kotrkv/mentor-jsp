@@ -34,6 +34,10 @@ public class UserService {
         return daoUser.getByLoginAndPassword(login, password);
     }
 
+    public Optional<User> findByLogin(String login) {
+        return daoUser.getByLogin(login);
+    }
+
     public void update(User user) {
         daoUser.update(user);
     }
