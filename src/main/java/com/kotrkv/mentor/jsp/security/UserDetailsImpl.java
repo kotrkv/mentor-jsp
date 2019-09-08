@@ -14,10 +14,6 @@ public class UserDetailsImpl implements UserDetails {
 
     private User user;
 
-    static {
-        System.out.println("--------------->>>>>>>>>>>>>>>>");
-    }
-
     public UserDetailsImpl(User user) {
         this.user = user;
     }

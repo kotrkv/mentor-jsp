@@ -7,7 +7,7 @@
 </head>
 <body>
 <h3>Welcome</h3>
-<form action="/login" method="get" class="form-style-9">
+<form action="/login" method="post" class="form-style-9">
     <ul>
         <li>
             <input type = "text" name = "login" placeholder = "Input login..." class="field-style field-full align-none"/>

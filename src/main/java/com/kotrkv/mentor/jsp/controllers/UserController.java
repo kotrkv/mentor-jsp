@@ -3,6 +3,8 @@ package com.kotrkv.mentor.jsp.controllers;
 import com.kotrkv.mentor.jsp.model.User;
 import com.kotrkv.mentor.jsp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -24,9 +27,19 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
+    public String login(HttpServletRequest request) {
+        System.out.println("/login");
+        return "redirect:/error";
+    }
+
+    @PostMapping("/auth")
     public String login(@RequestParam Map<String, String> allParams, HttpSession session) {
-        System.out.println("---------------2222222222222");
+        UserDetails userDetails = (UserDetails) SecurityContextHolder
+        .getContext().getAuthentication().getPrincipal();
+
+        System.out.println(userDetails.getAuthorities());
+
         String login = allParams.get("login");
         String password = allParams.get("password");
 
@@ -34,9 +47,7 @@ public class UserController {
             User user = userService.findByLoginAndPassword(login, password).get();
             session.setAttribute("user", user);
 
-            System.out.println("/login");
-
-            if (user.getRoles().stream().anyMatch(x -> x.getName().equalsIgnoreCase("admin"))) {
+            if (user.getRoles().stream().anyMatch(x -> x.getName().equalsIgnoreCase("ROLE_ADMIN"))) {
                 System.out.println("after login");
                 return "redirect:/admin";
             } else {
