@@ -76,6 +76,12 @@ h3 {
     text-align: center;
 }
 
+.error h3{
+    text-align: center;
+    color: red;
+    font: 14px Arial, Helvetica, sans-serif;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;

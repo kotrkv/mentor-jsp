@@ -33,5 +33,6 @@
         </tr>
     </c:forEach>
 </table>
+<a href="<c:url value="/perform_logout" />">Logout</a>
 </body>
 </html>

@@ -28,21 +28,21 @@ public class User {
     public User() {
     }
 
-    public User(String login, String password, String email, Set<Role> role) {
+    public User(String login, String password, String email, Set<Role> roles) {
         this.id = COUNTER++;
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.roles = role;
+        this.roles = roles;
     }
 
-    public User(Integer id, String login, String password, String email, Set<Role> role) {
+    public User(Integer id, String login, String password, String email, Set<Role> roles) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.roles = role;
+        this.roles = roles;
     }
 
     public Integer getId() {
@@ -77,7 +77,7 @@ public class User {
         return roles;
     }
 
-    public void setRole(Set<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
@@ -88,7 +88,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + roles + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }

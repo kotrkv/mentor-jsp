@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @ComponentScan("com.kotrkv.mentor.jsp.security")
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+//@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -25,29 +25,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/").permitAll()
+                .authorizeRequests().antMatchers("/user").hasAnyRole("ADMIN", "USER")
                 .and()
-                .authorizeRequests().antMatchers( "/admin/**").hasRole("ADMIN")
+                .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
+                .and()
+                .exceptionHandling().accessDeniedPage("/accessDenied")
                 .and()
                 .formLogin()
                 .loginPage("/")
+                .permitAll()
                 .usernameParameter("login")
                 .loginProcessingUrl("/login")
                 .successForwardUrl("/auth")
-        .failureForwardUrl("/error");
+                .and()
+                .logout()
+                .logoutUrl("/perform_logout")
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/");
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
-
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        System.out.println("--------------- >>>>>>>>>>>>>>>>");
-//        auth.inMemoryAuthentication()
-//                .withUser("admin").password("password").roles("ADMIN");
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -1,8 +1,11 @@
 package com.kotrkv.mentor.jsp.controllers;
 
+import com.kotrkv.mentor.jsp.model.Role;
 import com.kotrkv.mentor.jsp.model.User;
+import com.kotrkv.mentor.jsp.service.RoleService;
 import com.kotrkv.mentor.jsp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -12,8 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -22,15 +25,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
+
     @GetMapping("/")
     public String login() {
         return "index";
-    }
-
-    @PostMapping("/login")
-    public String login(HttpServletRequest request) {
-        System.out.println("/login");
-        return "redirect:/error";
     }
 
     @PostMapping("/auth")
@@ -42,6 +42,8 @@ public class UserController {
 
         String login = allParams.get("login");
         String password = allParams.get("password");
+
+        System.out.println("Start method .... ");
 
         if (userService.findByLoginAndPassword(login, password).isPresent()) {
             User user = userService.findByLoginAndPassword(login, password).get();
@@ -91,13 +93,16 @@ public class UserController {
     }
 
     @GetMapping("/admin/addUser")
-    public String addForm() {
+    public String addForm(Model model) {
+        model.addAttribute("roles", roleService.findAll());
         return "/addUser";
     }
 
     @PostMapping("/admin/addUser")
-    public String add(@ModelAttribute User user) {
-        userService.add(user);
+    public String add(@ModelAttribute User user, @ModelAttribute Role role) {
+//    public String add() {
+        int i = 0;
+        //userService.add(user);
         return "redirect:/admin";
     }
 
@@ -110,6 +115,14 @@ public class UserController {
     @GetMapping("/error")
     public String error(Model model) {
         model.addAttribute("error", "User not found");
+        return "errorPage";
+    }
+
+    @GetMapping("/accessDenied")
+    public String accessDenied(Authentication authentication, Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+        model.addAttribute("error", "Access denied for " + userDetails.getUsername());
         return "errorPage";
     }
 }

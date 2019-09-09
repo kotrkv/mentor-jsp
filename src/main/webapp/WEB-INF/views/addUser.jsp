@@ -21,9 +21,12 @@
             <input type = "text" name = "email" placeholder = "Input email..." class="field-style field-full align-none"/>
         </li>
         <li>
-            <select name="role" class="field-style field-full align-none">
-                <option value="user">Пользователь</option>
-                <option value="admin">Администратор</option>
+            <select class="field-style field-full align-none">
+                <c:forEach var="roles" items="${roles}">
+                    <option value="${roles}">${roles.name}</option>
+                </c:forEach>
+<%--                <option value="user">Пользователь</option>--%>
+<%--                <option value="admin">Администратор</option>--%>
             </select>
         </li>
         <li>
