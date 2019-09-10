@@ -7,7 +7,6 @@ import com.kotrkv.mentor.jsp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class UserController {
@@ -34,35 +31,20 @@ public class UserController {
     }
 
     @PostMapping("/auth")
-    public String login(@RequestParam Map<String, String> allParams, HttpSession session) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder
-        .getContext().getAuthentication().getPrincipal();
+    public String login(HttpSession session) {
 
-        System.out.println(userDetails.getAuthorities());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        String login = allParams.get("login");
-        String password = allParams.get("password");
-
-        System.out.println("Start method .... ");
-
-        if (userService.findByLoginAndPassword(login, password).isPresent()) {
-            User user = userService.findByLoginAndPassword(login, password).get();
-            session.setAttribute("user", user);
-
-            if (user.getRoles().stream().anyMatch(x -> x.getName().equalsIgnoreCase("ROLE_ADMIN"))) {
-                System.out.println("after login");
-                return "redirect:/admin";
-            } else {
-                return "redirect:/user";
-            }
+        if (authentication.getAuthorities().stream().anyMatch(x -> x.getAuthority().equalsIgnoreCase("ADMIN"))) {
+            return "redirect:/admin";
         } else {
-            return "redirect:/error";
+            session.setAttribute("user", authentication.getName());
+            return "redirect:/user";
         }
     }
 
     @GetMapping("/admin")
     public String getUsers(Model model) {
-        System.out.println("/admin");
         model.addAttribute("users", userService.findAll());
         return "/listUsers";
     }
@@ -100,9 +82,6 @@ public class UserController {
 
     @PostMapping("/admin/addUser")
     public String add(@ModelAttribute User user, @ModelAttribute Role role) {
-//    public String add() {
-        int i = 0;
-        //userService.add(user);
         return "redirect:/admin";
     }
 
@@ -119,10 +98,8 @@ public class UserController {
     }
 
     @GetMapping("/accessDenied")
-    public String accessDenied(Authentication authentication, Model model) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder
-                .getContext().getAuthentication().getPrincipal();
-        model.addAttribute("error", "Access denied for " + userDetails.getUsername());
+    public String accessDenied(Model model) {
+        model.addAttribute("error", "Access denied for " + SecurityContextHolder.getContext().getAuthentication().getName());
         return "errorPage";
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RoleService {
@@ -20,9 +19,5 @@ public class RoleService {
 
     public List<Role> findAll() {
         return roleDao.getAll();
-    }
-
-    public Optional<Role> findByName(String name) {
-        return roleDao.getByName(name);
     }
 }

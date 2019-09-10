@@ -24,7 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        System.out.println("----------!!!!!!!!!!!!");
 
         Optional<User> userOptional = userService.findByLogin(login);
 

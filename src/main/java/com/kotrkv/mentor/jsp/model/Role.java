@@ -1,11 +1,13 @@
 package com.kotrkv.mentor.jsp.model;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(schema = "jsp_project", name = "roles")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,5 +58,10 @@ public class Role {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }

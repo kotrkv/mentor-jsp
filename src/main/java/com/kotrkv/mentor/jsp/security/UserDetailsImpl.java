@@ -1,14 +1,10 @@
 package com.kotrkv.mentor.jsp.security;
 
-import com.kotrkv.mentor.jsp.model.Role;
 import com.kotrkv.mentor.jsp.model.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -20,14 +16,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-
-        for (Role role : user.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-
-        }
-        return grantedAuthorities;
+        return user.getRoles();
     }
 
     @Override
