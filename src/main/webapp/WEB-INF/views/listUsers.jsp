@@ -3,10 +3,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>All users</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" type="text/css"/>
+    <title>Admin panel</title>
+    <style>
+        <%@include file="/resources/css/signin.css"%>
+    </style>
+    <style>
+        <%@include file="/resources/css/bootstrap.min.css"%>
+    </style>
 </head>
 <body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<c:url value="/perform_logout" />">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 <a href="/"><-- Home</a>
 <h3>Users...</h3>
 <table class="form-style-9">
