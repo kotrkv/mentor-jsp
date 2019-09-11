@@ -10,6 +10,9 @@
     <style>
         <%@include file="/resources/css/bootstrap.min.css"%>
     </style>
+    <style>
+        <%@include file="/resources/css/dashboard.css"%>
+    </style>
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -40,7 +43,7 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
+            <h1 class="page-header">Admin panel</h1>
             <h2 class="sub-header">Section title</h2>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -69,6 +72,27 @@
                         </tr>
                     </c:forEach>
                 </table>
+                <!-- Кнопка, открывающее модальное окно -->
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-1">
+                    Открыть модальное окно
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Модальное окно, основное содержимое которого организовано с использованием системы сеток Bootstrap 3 или 4 -->
+<%--                <div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog"--%>
+<div id="modal-1" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Modal window</h3>
+            </div>
+            <div class="modal-body">
+                <p>This is modal window</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
             </div>
         </div>
     </div>
