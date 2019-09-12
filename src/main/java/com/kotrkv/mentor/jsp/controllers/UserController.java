@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
@@ -38,6 +39,7 @@ public class UserController {
         if (authentication.getAuthorities().stream().anyMatch(x -> x.getAuthority().equalsIgnoreCase("ADMIN"))) {
             return "redirect:/admin";
         } else {
+            System.out.println(authentication.getName());
             session.setAttribute("user", authentication.getName());
             return "redirect:/user";
         }
@@ -50,8 +52,11 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public String user() {
-        return "user";
+    public ModelAndView user() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", SecurityContextHolder.getContext().getAuthentication().getName());
+        modelAndView.setViewName("user");
+        return modelAndView;
     }
 
     @GetMapping("/admin/editUser")
