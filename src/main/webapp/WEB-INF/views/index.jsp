@@ -5,12 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Test jsp project</title>
-    <style>
-        <%@include file="/resources/css/signin.css"%>
-    </style>
-    <style>
-        <%@include file="/resources/css/bootstrap.min.css"%>
-    </style>
+
+    <link rel="stylesheet" href="<c:url value="/resources/css/signin.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
+
 </head>
 <body>
 <c:if test="${param.error != null}">
@@ -26,6 +24,5 @@
         <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
     </form>
 </div>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 </body>
 </html>

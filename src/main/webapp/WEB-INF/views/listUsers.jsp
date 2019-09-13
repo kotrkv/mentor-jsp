@@ -1,40 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>--%>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Admin panel</title>
-    <style>
-        <%@include file="/resources/css/signin.css"%>
-    </style>
-    <style>
-        <%@include file="/resources/css/bootstrap.min.css"%>
-    </style>
-    <style>
-        <%@include file="/resources/css/dashboard.css"%>
-    </style>
 
-    <%--    <jsp:include page="/resources/js/bootstrap.js"/>--%>
-    <%--    <jsp:include page="/resources/js/jquery-3.4.1.js"/>--%>
-    <%--    <jsp:include  page="/resources/js/myscript.js"/>--%>
+    <link href="<c:url value="${pageContext.request.contextPath}/resources/css/bootstrap.css"/>" rel="stylesheet">
+    <link href="<c:url value="${pageContext.request.contextPath}/resources/css/dashboard.css"/>" rel="stylesheet">
 
-    <%--    <script src="<c:url value="/resources/js/myscript.js"/>"></script>--%>
-    <!--Крах-->
-    <%--    <script src="/resources/js/myscript.js"/>--%>
-    <%--    <script type="text/javascript" src="/resources/js/myscript.js"/>--%>
+    <script src="${pageContext.request.contextPath}/resources/js/myscript.js"></script>
 
-    <%--    <script type="text/javascript">--%>
-    <%--        <%@include file="/resources/js/bootstrap.js" %>--%>
-    <%--    </script>--%>
-    <%--    <script type="text/javascript">--%>
-    <%--        <%@include file="/resources/js/myscript.js" %>--%>
-    <%--    </script>--%>
-    <%--<script>--%>
-    <%--    function clickme() {--%>
-    <%--        alert('Клик!!');--%>
-    <%--    }--%>
-    <%--</script>--%>
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -67,69 +42,66 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Admin panel</h1>
             <h2 class="sub-header">Section title</h2>
-<%--            <div class="table-responsive table-bordered">--%>
+            <%--            <div class="table-responsive table-bordered">--%>
             <a href="/admin/addUser" class="link">Add user</a>
             <div class="table-responsive">
-                <table class="table table-striped">
-                    <tr>All users</tr>
-                    <tr>
-                        <th>ID</th>
-                        <th>Role</th>
-                        <th>Login</th>
-                        <th>Password</th>
-                        <th>Email</th>
-                        <th>Edit</th>
-                    </tr>
-                    <c:forEach var="user" items="${users}">
+                <div class="panel panel-primary">
+                    <table class="table table-striped">
+                        <tr>All users</tr>
                         <tr>
-                            <td>${user.id}</td>
-                            <td>
-                                <c:forEach var="role" items="${user.roles}">
-                                    ${role.name}
-                                </c:forEach>
-                            </td>
-                            <td>${user.login}</td>
-                            <td>${user.password}</td>
-                            <td>${user.email}</td>
-<%--                            <td><a href="/admin/editUser?id=${user.id}">Edit</a></td>--%>
-                            <td><a href="/admin/editUser?id=${user.id}" class="btn btn-info">Edit</a></td>
-<%--                            <td><a href="/admin/deleteUser?id=${user.id}">Remove</a></td>--%>
+                            <th>ID</th>
+                            <th>Role</th>
+                            <th>Login</th>
+                            <th>Password</th>
+                            <th>Email</th>
+                            <th>Edit</th>
                         </tr>
-                    </c:forEach>
-                </table>
+                        <c:forEach var="user" items="${users}">
+                            <tr>
+                                <td>${user.id}</td>
+                                <td>
+                                    <c:forEach var="role" items="${user.roles}">
+                                        ${role.name}
+                                    </c:forEach>
+                                </td>
+                                <td>${user.login}</td>
+                                <td>${user.password}</td>
+                                <td>${user.email}</td>
+                                    <%--                            <td><a href="/admin/editUser?id=${user.id}">Edit</a></td>--%>
+                                <td><a href="/admin/editUser?id=${user.id}" class="btn btn-info">Edit</a></td>
+                                    <%--                            <td><a href="/admin/deleteUser?id=${user.id}">Remove</a></td>--%>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+                <p><a href="#myModal1" class="btn btn-primary" data-toggle="modal">Открыть модальное окно 1</a></p>
+                <div id="myModal1" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Заголовок модального окна 1</h4>
+                            </div>
+                            <div class="modal-body">
+                                Содержимое модального окна 1...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Кнопка, открывающее модальное окно -->
-                <button id="btn" type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-1">
-                    Открыть модальное окно
-                </button>
-                <%--                <input value="Нажми меня" onclick="alert('Клик!')" type="button">--%>
                 <input value="Нажми меня" onclick="clickme()" type="button">
+
             </div>
         </div>
     </div>
 </div>
-<!-- Модальное окно, основное содержимое которого организовано с использованием системы сеток Bootstrap 3 или 4 -->
-<%--                <div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog"--%>
-<div id="modal-1" class="modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Modal window</h3>
-            </div>
-            <div class="modal-body">
-                <p>This is modal window</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    $(function () {
-        $("#btn").click(function () {
-            $("#modal-1").modal('show');
-        });
-    });
-</script>
+
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+
 </body>
 </html>

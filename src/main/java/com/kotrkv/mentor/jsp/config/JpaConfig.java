@@ -50,7 +50,7 @@ public class JpaConfig {
     @Bean
     public DataSource dataSource(@Value("org.postgresql.Driver") String driver,
                                  @Value("jdbc:postgresql://localhost:5432/mentor") String url,
-                                 @Value("postgres") String user,
+                                 @Value("admin") String user,
                                  @Value("postgres") String password) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(driver);
