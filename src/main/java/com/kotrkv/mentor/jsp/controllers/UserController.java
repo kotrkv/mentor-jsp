@@ -71,6 +71,12 @@ public class UserController {
                            @RequestParam("login") String login,
                            @RequestParam("password") String password,
                            @RequestParam("email") String email) {
+
+        System.out.println("Id - " + id);
+        System.out.println("Login - " + login);
+        System.out.println("Password - " + password);
+        System.out.println("Email - " + email);
+
         User user = userService.findById(id).get();
         user.setLogin(login);
         user.setPassword(password);
