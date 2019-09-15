@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <title>Test jsp project</title>
 
-    <link rel="stylesheet" href="<c:url value="/resources/css/signin.css" />" />
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/signin.css" />" />
 
 </head>
 <body>

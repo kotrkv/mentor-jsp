@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -48,6 +50,7 @@ public class UserController {
     @GetMapping("/admin")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.findAll());
+        model.addAttribute("roles", roleService.findAll());
         return "/listUsers";
     }
 
@@ -63,6 +66,7 @@ public class UserController {
     public String edit(@RequestParam(value = "id") Integer id, Model model) {
         User user = userService.findById(id).get();
         model.addAttribute("user", user);
+        model.addAttribute("roles", roleService.findAll());
         return "/editUser";
     }
 
@@ -70,18 +74,27 @@ public class UserController {
     public String editForm(@RequestParam("id") Integer id,
                            @RequestParam("login") String login,
                            @RequestParam("password") String password,
-                           @RequestParam("email") String email) {
+                           @RequestParam("email") String email,
+                           @RequestParam("roleName") String roleName) {
 
         System.out.println("Id - " + id);
         System.out.println("Login - " + login);
         System.out.println("Password - " + password);
         System.out.println("Email - " + email);
+        System.out.println("Role - " + roleName);
+
+        Role role = roleService.findByName(roleName).get();
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
 
         User user = userService.findById(id).get();
         user.setLogin(login);
         user.setPassword(password);
         user.setEmail(email);
+        user.setRoles(roles);
+
         userService.update(user);
+
         return "redirect:/admin";
     }
 
@@ -92,7 +105,12 @@ public class UserController {
     }
 
     @PostMapping("/admin/addUser")
-    public String add(@ModelAttribute User user, @ModelAttribute Role role) {
+    public String add(@ModelAttribute User user, @RequestParam String roleName) {
+        Role role = roleService.findByName(roleName).get();
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        user.setRoles(roles);
+        userService.add(user);
         return "redirect:/admin";
     }
 

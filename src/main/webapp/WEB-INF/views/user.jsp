@@ -42,13 +42,11 @@
             <ul class="nav nav-sidebar">
                 <li><a href="/admin">Admin</a></li>
                 <li class="active"><a href="#">User</a></li>
-                <%--                <li><a href="/user">User</a></li>--%>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">User page</h1>
             <h3>Hello, ${user} </h3>
-            <a href="#error" class="btn btn-block">Dialog</a>
         </div>
         <div id="error" class="modalbackground">
             <div class="modalwindow">
