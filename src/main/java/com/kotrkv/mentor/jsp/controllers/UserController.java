@@ -35,13 +35,14 @@ public class UserController {
 
     @PostMapping("/auth")
     public String login(HttpSession session) {
-
+        System.out.println("/auth");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication.getAuthorities().stream().anyMatch(x -> x.getAuthority().equalsIgnoreCase("ADMIN"))) {
+        if (authentication.getAuthorities().stream().anyMatch(x -> x.getAuthority().equalsIgnoreCase("ROLE_ADMIN"))) {
+            System.out.println("ok");
             return "redirect:/admin";
         } else {
-            System.out.println(authentication.getName());
+            System.out.println("This is - " + authentication.getName());
             session.setAttribute("user", authentication.getName());
             return "redirect:/user";
         }
@@ -49,6 +50,7 @@ public class UserController {
 
     @GetMapping("/admin")
     public String getUsers(Model model) {
+        System.out.println("/admin");
         model.addAttribute("users", userService.findAll());
         model.addAttribute("roles", roleService.findAll());
         return "/listUsers";
@@ -122,6 +124,7 @@ public class UserController {
 
     @GetMapping("/error")
     public String error(Model model) {
+        System.out.println("User not found");
         model.addAttribute("error", "User not found");
         return "errorPage";
     }
