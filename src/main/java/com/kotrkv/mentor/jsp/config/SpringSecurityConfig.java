@@ -5,10 +5,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
@@ -17,9 +21,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/user").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                .authorizeRequests().antMatchers("/user").hasAnyAuthority("ADMIN", "USER")
                 .and()
-                .authorizeRequests().antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                .authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN")
                 .and()
                 .exceptionHandling().accessDeniedPage("/accessDenied")
                 .and()
@@ -39,13 +43,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    // create two users, admin and user
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
-                .and()
-                .withUser("admin").password("password").roles("ADMIN");
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
     }
+
+
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password("password").roles("USER")
+//                .and()
+//                .withUser("admin").password("password").roles("ADMIN");
+//    }
 }

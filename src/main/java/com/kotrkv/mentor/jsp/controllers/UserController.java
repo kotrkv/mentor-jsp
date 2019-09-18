@@ -38,7 +38,7 @@ public class UserController {
         System.out.println("/auth");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication.getAuthorities().stream().anyMatch(x -> x.getAuthority().equalsIgnoreCase("ROLE_ADMIN"))) {
+        if (authentication.getAuthorities().stream().anyMatch(x -> x.getAuthority().equalsIgnoreCase("ADMIN"))) {
             System.out.println("ok");
             return "redirect:/admin";
         } else {
