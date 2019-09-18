@@ -3,26 +3,26 @@ package com.kotrkv.mentor.jsp.model;
 import javax.persistence.*;
 import java.util.Set;
 
-//@Entity
-//@Table(name = "users", schema = "jsp_project")
+@Entity
+@Table(name = "users", schema = "jsp_project")
 public class User {
     private static int COUNTER = 1;
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @Column(name="login")
+    @Column(name="login")
     private String login;
 
-//    @Column(name="password")
+    @Column(name="password")
     private String password;
 
-//    @Column(name="email")
+    @Column(name="email")
     private String email;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(schema = "jsp_project", name="user_role", joinColumns = @JoinColumn(name="user_id"),
-//                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(schema = "jsp_project", name="user_role", joinColumns = @JoinColumn(name="user_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {

@@ -17,13 +17,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/user").hasAnyAuthority("ADMIN", "USER")
+                .authorizeRequests().antMatchers("/user").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .and()
                 .authorizeRequests().antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .and()
                 .exceptionHandling().accessDeniedPage("/accessDenied")
                 .and()
-                .authorizeRequests().antMatchers("/").permitAll()
+                .authorizeRequests().antMatchers("/", "/resources/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/")
