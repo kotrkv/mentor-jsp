@@ -4,13 +4,10 @@ import com.kotrkv.mentor.jsp.dao.UserDao;
 import com.kotrkv.mentor.jsp.model.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-//import org.springframework.transaction.annotation.Transactional;
 
-//import javax.persistence.EntityManager;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-//import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +25,7 @@ public class UserDaoJpa implements UserDao {
 
     @Override
     public Optional<User> getById(Integer id) {
-
         return Optional.of(entityManager.find(User.class, id));
-//        return Optional.empty();
     }
 
     @Override
@@ -40,7 +35,6 @@ public class UserDaoJpa implements UserDao {
         query.setParameter("password", password);
         List<User> users = query.getResultList();
         return users.size() > 0 ? Optional.of((User)query.getSingleResult()) : Optional.empty();
-//        return null;
     }
 
     @Override
@@ -49,13 +43,11 @@ public class UserDaoJpa implements UserDao {
         query.setParameter("login", login);
         List<User> users = query.getResultList();
         return users.size() > 0 ? Optional.of((User)query.getSingleResult()) : Optional.empty();
-//        return null;
     }
 
     @Override
     public List<User> getAll() {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
-//        return null;
     }
 
     @Override

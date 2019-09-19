@@ -1,16 +1,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:fragment="header-css">
-        <!-- this is header-css -->
         <link rel="stylesheet" type="text/css"
               href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-
         <link rel="stylesheet" th:href="@{/css/dashboard.css}"/>
     </div>
 </head>
 <body>
 <div th:fragment="header">
-    <!-- this is header -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">

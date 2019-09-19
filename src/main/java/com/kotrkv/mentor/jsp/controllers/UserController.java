@@ -130,8 +130,7 @@ public class UserController {
     }
 
     @GetMapping("/accessDenied")
-    public String accessDenied(Model model) {
-        model.addAttribute("error", "Access denied for " + SecurityContextHolder.getContext().getAuthentication().getName());
-        return "errorPage";
+    public String accessDenied() {
+        return "error/403";
     }
 }
