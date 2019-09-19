@@ -53,8 +53,8 @@
                                     <td th:text="${user.password}"></td>
                                     <td th:text="${user.email}"></td>
                                     <!--                                            <td><a href="#${user.id}" class="btn btn-primary"-->
-                                    <td th:inline="text"><a href="#[[${user.id}]]" class="btn btn-primary"
-<!--                                    <td><a href="#18" class="btn btn-primary"-->
+<!--                                    <td th:inline="text"><a href="#[[${user.id}]]" class="btn btn-primary"-->
+                                    <td><a href="#11" th:href="@{'#'+${user.id}}" class="btn btn-primary"
                                            data-toggle="modal">Edit</a>
                                     </td>
 
