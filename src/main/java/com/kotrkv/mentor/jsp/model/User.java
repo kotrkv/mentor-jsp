@@ -1,5 +1,9 @@
 package com.kotrkv.mentor.jsp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -23,6 +27,7 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(schema = "jsp_project", name="user_role", joinColumns = @JoinColumn(name="user_id"),
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonBackReference
     private Set<Role> roles;
 
     public User() {

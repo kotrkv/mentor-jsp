@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-@Configuration
+//@Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -24,6 +24,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/accessDenied")
                 .and()
                 .authorizeRequests().antMatchers("/", "/resources/**").permitAll()
+                .and()
+                .authorizeRequests().anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/")

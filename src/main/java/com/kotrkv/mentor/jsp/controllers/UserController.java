@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 import java.util.Set;
 
-@Controller
+//@Controller
 public class UserController {
 
     @Autowired
@@ -48,21 +48,21 @@ public class UserController {
         }
     }
 
-    @GetMapping("/admin")
-    public String getUsers(Model model) {
-        System.out.println("/admin");
-        model.addAttribute("users", userService.findAll());
-        model.addAttribute("roles", roleService.findAll());
-        return "/listUsers";
-    }
+//    @GetMapping("/admin")
+//    public String getUsers(Model model) {
+//        System.out.println("/admin");
+//        model.addAttribute("users", userService.findAll());
+//        model.addAttribute("roles", roleService.findAll());
+//        return "/listUsers";
+//    }
 
-    @GetMapping("/user")
-    public ModelAndView user() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", SecurityContextHolder.getContext().getAuthentication().getName());
-        modelAndView.setViewName("user");
-        return modelAndView;
-    }
+//    @GetMapping("/user")
+//    public ModelAndView user() {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("user", SecurityContextHolder.getContext().getAuthentication().getName());
+//        modelAndView.setViewName("user");
+//        return modelAndView;
+//    }
 
     @GetMapping("/admin/editUser")
     public String edit(@RequestParam(value = "id") Integer id, Model model) {

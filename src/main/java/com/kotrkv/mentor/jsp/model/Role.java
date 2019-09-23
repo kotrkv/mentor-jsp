@@ -1,5 +1,8 @@
 package com.kotrkv.mentor.jsp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -18,10 +21,15 @@ public class Role implements GrantedAuthority {
     private String name;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<User> users;
 
     public Role() {
     }
+
+//    public Role(String name) {
+//        this.name = name;
+//    }
 
     public Role(String name, Set<User> users) {
         this.name = name;
