@@ -1,46 +1,44 @@
 package com.kotrkv.mentor.jsp.controllers;
 
-import com.kotrkv.mentor.jsp.model.Role;
 import com.kotrkv.mentor.jsp.model.User;
-import com.kotrkv.mentor.jsp.service.RoleService;
 import com.kotrkv.mentor.jsp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
+@RequestMapping("api/")
 public class RestUserController {
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private RoleService roleService;
-
-    @GetMapping("/user")
-    public String getUser(Authentication authentication) {
-        return authentication.getName();
-    }
-
-    @GetMapping("/admin")
+    @GetMapping("/users")
     public List<User> getUsers() {
         return userService.findAll();
     }
 
-    @PostMapping("/admin/addUser")
-    public ResponseEntity<Object> addUser(@RequestBody User user) {
-        userService.add(user);
-        return ResponseEntity.ok().build();
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable("id") Integer id) {
+
+        return userService.findById(id).get();
     }
 
-    @PutMapping("/admin/editUser")
-    public ResponseEntity<Void> editUser(@RequestBody User user) {
+    @PostMapping("/user")
+    public User addUser(@RequestBody User user) {
+        userService.add(user);
+        return user;
+    }
+
+    @PutMapping("/user")
+    public User editUser(@RequestBody User user) {
         userService.update(user);
-        return ResponseEntity.noContent().build();
+        return user;
+    }
+
+    @DeleteMapping("/user/{id}")
+    public void deleteUser(@PathVariable("id") Integer id) {
+        userService.delete(id);
     }
 }
