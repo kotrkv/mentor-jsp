@@ -24,4 +24,8 @@ public class RoleService {
     public Optional<Role> findByName(String name) {
         return roleDao.getByName(name);
     }
+
+    public Optional<Role> findById(Integer id) {
+        return roleDao.getById(id);
+    }
 }

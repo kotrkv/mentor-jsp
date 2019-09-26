@@ -29,6 +29,11 @@ public class RestUserController {
         return roleService.findAll();
     }
 
+    @GetMapping("/roles/{id}")
+    public Role getRole(@PathVariable Integer id) {
+        return roleService.findById(id).get();
+    }
+
     @GetMapping("/{id}")
     public User getUser(@PathVariable("id") Integer id) {
         return userService.findById(id).get();

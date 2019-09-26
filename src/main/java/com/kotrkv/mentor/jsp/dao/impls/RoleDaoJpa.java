@@ -30,4 +30,12 @@ public class RoleDaoJpa implements RoleDao {
         List<Role> roles = query.getResultList();
         return roles.size() > 0 ? Optional.of((Role)query.getSingleResult()) : Optional.empty();
     }
+
+    @Override
+    public Optional<Role> getById(Integer id) {
+        TypedQuery<Role> query = entityManager.createQuery("SELECT u FROM Role u WHERE u.id = :id", Role.class);
+        query.setParameter("id", id);
+        List<Role> roles = query.getResultList();
+        return roles.size() > 0 ? Optional.of((Role)query.getSingleResult()) : Optional.empty();
+    }
 }
