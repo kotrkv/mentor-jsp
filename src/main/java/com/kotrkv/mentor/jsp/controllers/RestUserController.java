@@ -1,6 +1,8 @@
 package com.kotrkv.mentor.jsp.controllers;
 
+import com.kotrkv.mentor.jsp.model.Role;
 import com.kotrkv.mentor.jsp.model.User;
+import com.kotrkv.mentor.jsp.service.RoleService;
 import com.kotrkv.mentor.jsp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,36 +10,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/")
+@RequestMapping("api/users")
 public class RestUserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
+    @Autowired
+    private RoleService roleService;
+
+    @GetMapping("/")
     public List<User> getUsers() {
         return userService.findAll();
     }
 
-    @GetMapping("/user/{id}")
-    public User getUser(@PathVariable("id") Integer id) {
+    @GetMapping("/roles")
+    public List<Role> getRoles() {
+        return roleService.findAll();
+    }
 
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable("id") Integer id) {
         return userService.findById(id).get();
     }
 
-    @PostMapping("/user")
+    @PostMapping("/")
     public User addUser(@RequestBody User user) {
         userService.add(user);
         return user;
     }
 
-    @PutMapping("/user")
+    @PutMapping("/")
     public User editUser(@RequestBody User user) {
         userService.update(user);
         return user;
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") Integer id) {
         userService.delete(id);
     }
