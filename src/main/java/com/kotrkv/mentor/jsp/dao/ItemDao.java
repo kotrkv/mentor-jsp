@@ -1,7 +1,6 @@
 package com.kotrkv.mentor.jsp.dao;
 
 import com.kotrkv.mentor.jsp.model.Item;
-import com.kotrkv.mentor.jsp.model.User;
 
 import java.util.List;
 import java.util.Optional;
