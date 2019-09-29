@@ -1,16 +1,12 @@
 package com.kotrkv.mentor.jsp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "users", schema = "jsp_project")
 public class User {
-    private static int COUNTER = 1;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -27,14 +23,12 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(schema = "jsp_project", name="user_role", joinColumns = @JoinColumn(name="user_id"),
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    @JsonBackReference
     private Set<Role> roles;
 
     public User() {
     }
 
     public User(String login, String password, String email, Set<Role> roles) {
-        this.id = COUNTER++;
         this.id = id;
         this.login = login;
         this.password = password;
