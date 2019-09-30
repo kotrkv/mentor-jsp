@@ -5,7 +5,6 @@ import com.kotrkv.mentor.jsp.model.User;
 import com.kotrkv.mentor.jsp.service.RoleService;
 import com.kotrkv.mentor.jsp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,7 +47,6 @@ public class RestUserController {
 
     @PutMapping("/")
     public User update(@RequestBody User user) {
-        System.out.println("User in @PutMapping - " + user);
         userService.update(user);
         return user;
     }
