@@ -11,23 +11,43 @@ import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class AuthService {
 
+    private final static String CLIENT_ID = "144102236584-tb6qf5284uvq4t8b2oqbeec8k0lenq6b.apps.googleusercontent.com";
+    private final static String CLIENT_SECRET = "t6YxWs1rEq5nhxHjFrtXKmKf";
+
     private OAuth20Service service;
 
-    public String authorizationUrl() {
-        final String clientId = "144102236584-tb6qf5284uvq4t8b2oqbeec8k0lenq6b.apps.googleusercontent.com";
-        final String clientSecret = "t6YxWs1rEq5nhxHjFrtXKmKf";
+    public String authorisationUrl() {
+
+        final String secretState = "secret" + new Random().nextInt(999_999);
+        authService();
+
+        final Map<String, String> additionalParams = new HashMap<>();
+        additionalParams.put("access_type", "offline");
+        additionalParams.put("prompt", "consent");
+
+        return service.createAuthorizationUrlBuilder()
+                .state(secretState)
+                .additionalParams(additionalParams)
+                .build();
+    }
+
+    private void authService() {
+        final String clientId = CLIENT_ID;
+        final String clientSecret = CLIENT_SECRET;
 
         service = new ServiceBuilder(clientId)
                 .apiSecret(clientSecret)
                 .defaultScope("profile")
                 .callback("http://localhost:8080/auth/google")
                 .build(GoogleApi20.instance());
-        return service.getAuthorizationUrl();
     }
 
     private Optional<OAuth2AccessToken> accessToken(String code) {
